@@ -8,6 +8,8 @@ import (
 	"github.com/ShubhanYenuganti/infra-planning-cli/internal/docs"
 )
 
+const currentSchemaVersion = 1
+
 func BuildPlan(req Request, repo discovery.RepoContext) Plan {
 	now := time.Now().UTC()
 
@@ -22,8 +24,19 @@ func BuildPlan(req Request, repo discovery.RepoContext) Plan {
 		plan = buildComputePlan(req, repo)
 	case DomainDatabase:
 		plan = buildDatabasePlan(req, repo)
+	case DomainUnknown:
+		plan.Title = "Infrastructure Plan"
+		plan.ProblemSummary = req.Raw
+		plan.RecommendedPath = "Clarify the target AWS domain before proceeding."
+		plan.Steps = []Step{}
+		plan.Verification = []string{}
 	default:
-		plan = buildNetworkingPlan(req, repo) // safety net; clarification gate should have fired
+		// A new Domain value was added without updating this switch.
+		plan.Title = "Infrastructure Plan"
+		plan.ProblemSummary = req.Raw
+		plan.RecommendedPath = "Clarify the target AWS domain before proceeding."
+		plan.Steps = []Step{}
+		plan.Verification = []string{}
 	}
 
 	if satisfied {
@@ -33,7 +46,7 @@ func BuildPlan(req Request, repo discovery.RepoContext) Plan {
 		}}, plan.Steps...)
 	}
 
-	plan.Metadata.SchemaVersion = 1
+	plan.Metadata.SchemaVersion = currentSchemaVersion
 	plan.Metadata.GeneratedAt = now
 	plan.Metadata.Request = req.Raw
 	plan.Metadata.Domain = req.PrimaryDomain
@@ -58,6 +71,7 @@ func computeConfidence(domain Domain, repoEv []discovery.Evidence, conflicts []C
 		}
 		return ConfidenceLow
 	}
+	// TODO(Task 13/14): raise confidence when cost hints and satisfaction are implemented
 	if domain == DomainCompute || domain == DomainDatabase {
 		return ConfidenceLow
 	}
@@ -94,6 +108,7 @@ func combineEvidence(repoEv []discovery.Evidence, docLinks []docs.DocLink) []Evi
 func buildNetworkingPlan(req Request, repo discovery.RepoContext) Plan {
 	evidenceLine := "No existing AWS IaC evidence was found. Start by adding a minimal Terraform networking module."
 	if len(repo.Evidence) > 0 {
+		// first evidence entry used for inline context; all entries appear in Metadata.Evidence
 		ev := repo.Evidence[0]
 		evidenceLine = fmt.Sprintf("Use existing repo evidence from `%s`: `%s`.", ev.Path, ev.Snippet)
 	}
