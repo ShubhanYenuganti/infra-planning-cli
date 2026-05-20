@@ -13,14 +13,15 @@ func (*SubcommandsCheck) Name() string { return "subcommands-present" }
 
 func (*SubcommandsCheck) Run(cliDir string) error {
 	required := []string{"sync", "search", "sql"}
-	cmdDir := filepath.Join(cliDir, "cmd")
-	contents, err := concatGoSources(cmdDir)
-	if err != nil {
-		alt := filepath.Join(cliDir, "internal", "cmd")
-		contents, err = concatGoSources(alt)
-		if err != nil {
-			return fmt.Errorf("no cmd directory found")
+	var contents string
+	for _, dir := range []string{"cmd", filepath.Join("internal", "cmd"), filepath.Join("internal", "cli")} {
+		c, err := concatGoSources(filepath.Join(cliDir, dir))
+		if err == nil {
+			contents += c
 		}
+	}
+	if contents == "" {
+		return fmt.Errorf("no cmd directory found")
 	}
 	for _, sub := range required {
 		if !strings.Contains(contents, sub+"Cmd") &&

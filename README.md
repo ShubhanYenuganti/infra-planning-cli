@@ -31,6 +31,34 @@ Or per CLI:
 go install github.com/ShubhanYenuganti/infra-press/library/gcp/cloud-run-admin/cmd/cloud-run-admin-pp-cli@latest
 ```
 
+## Spec sources
+
+Each CLI is generated from an OpenAPI 3.0 spec. GCP and AWS specs are sourced
+directly from [apis.guru](https://apis.guru/) — no conversion required. Azure
+specs require an extra step described below.
+
+| CLI | apis.guru key | OpenAPI |
+|---|---|---|
+| `cloud-run-admin-pp-cli` | `googleapis.com/run/v2` | 3.0 — direct |
+| `cloud-functions-pp-cli` | `googleapis.com/cloudfunctions/v2` | 3.0 — direct |
+| `lambda-pp-cli` | `amazonaws.com/lambda/2015-03-31` | 3.0 — direct |
+| `apprunner-pp-cli` | `amazonaws.com/apprunner/2020-05-15` | 3.0 — direct |
+| `functions-pp-cli` | `azure.com:web-WebApps` (2018-11-01) | 2.0 → upgrade to 3.0 via `swagger2openapi` |
+| `container-apps-pp-cli` | Not on apis.guru (GA'd 2022) | Sourced from `azure/azure-rest-api-specs`, then 2.0 → 3.0 |
+
+### Azure spec resolution
+
+Azure is the only cloud that requires a pre-processing step before invoking
+printing-press:
+
+1. **`functions-pp-cli`** — fetch `azure.com:web-WebApps` from apis.guru
+   (OpenAPI 2.0), run `swagger2openapi` to upgrade to 3.0, pass to press.
+2. **`container-apps-pp-cli`** — fetch the ARM spec from
+   [`azure/azure-rest-api-specs`](https://github.com/Azure/azure-rest-api-specs)
+   (`Microsoft.App/stable/`), run `swagger2openapi`, pass to press.
+
+The 2.0→3.0 upgrade is a single command with no structural remap required.
+
 ## Why
 
 Most generators wrap endpoints and stop. Printing Press builds CLIs that

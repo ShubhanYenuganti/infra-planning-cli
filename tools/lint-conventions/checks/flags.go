@@ -13,14 +13,14 @@ func (*FlagsCheck) Name() string { return "required-flags" }
 func (*FlagsCheck) Run(cliDir string) error {
 	required := []string{"--json", "--dry-run", "--select", "--data-source", "--compact"}
 	var contents string
-	for _, dir := range []string{"cmd", "internal/cmd"} {
+	for _, dir := range []string{"cmd", "internal/cmd", "internal/cli"} {
 		c, err := concatGoSources(filepath.Join(cliDir, dir))
 		if err == nil {
 			contents += c
 		}
 	}
 	if contents == "" {
-		return fmt.Errorf("no Go source found in cmd/ or internal/cmd/")
+		return fmt.Errorf("no Go source found in cmd/, internal/cmd/, or internal/cli/")
 	}
 	for _, flag := range required {
 		bare := strings.TrimPrefix(flag, "--")

@@ -1,2 +1,4 @@
 .worktrees/
 /infra-plan
+# compiled CLI binaries (rebuilt by golden tests and goreleaser)
+library/**/cmd/*/*

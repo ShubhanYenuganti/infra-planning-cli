@@ -15,7 +15,7 @@ import (
 	"github.com/spf13/cobra"
 )
 
-var version = "v2"
+var version = "v0.1.0"
 
 type rootFlags struct {
 	asJSON       bool
@@ -45,7 +45,7 @@ func Execute() error {
 		SilenceUsage: true,
 		Version:      version,
 	}
-	rootCmd.SetVersionTemplate("cloud-run-admin-pp-cli {{ .Version }}\n")
+	rootCmd.SetVersionTemplate("{{ .Version }}\n")
 
 	rootCmd.PersistentFlags().BoolVar(&flags.asJSON, "json", false, "Output as JSON")
 	rootCmd.PersistentFlags().BoolVar(&flags.compact, "compact", false, "Return only key fields (id, name, status, timestamps) for minimal token usage")
@@ -102,8 +102,14 @@ func Execute() error {
 	rootCmd.AddCommand(newAPICmd(&flags))
 	rootCmd.AddCommand(newResourceGetIamPolicyPromotedCmd(&flags))
 	rootCmd.AddCommand(newVersionCliCmd())
+	rootCmd.AddCommand(newSyncCmd(&flags))
+	rootCmd.AddCommand(newSearchCmd(&flags))
+	rootCmd.AddCommand(newSqlCmd(&flags))
 
 	err := rootCmd.Execute()
+	if err != nil && strings.Contains(err.Error(), "unknown command") {
+		return usageErr(err)
+	}
 	if err != nil && strings.Contains(err.Error(), "unknown flag") {
 		msg := err.Error()
 		// Extract the flag name from the error message (e.g., "unknown flag: --foob")

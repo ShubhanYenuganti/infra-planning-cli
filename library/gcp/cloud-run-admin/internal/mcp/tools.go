@@ -212,7 +212,7 @@ func newMCPClient() (*client.Client, error) {
 
 func dbPath() string {
 	home, _ := os.UserHomeDir()
-	return filepath.Join(home, ".local", "share", "cloud-run-admin-pp-cli", "data.db")
+	return home + "/.infra-press/cloud-run-admin-pp-cli.db"
 }
 // Note: MCP tools use their own dbPath() because they are in a separate package (main, not cli).
 // The CLI's defaultDBPath() in the cli package uses the same canonical path.

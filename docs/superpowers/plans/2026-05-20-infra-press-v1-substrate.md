@@ -2680,6 +2680,21 @@ git commit -m "ci: lint, per-cli-tests, golden, release, nightly workflows"
 
 End-to-end run of the 8-step pipeline against GCP Cloud Run. This proves the substrate works.
 
+> **Blocker resolved (2026-05-20):** The original plan pointed `--spec` at the GCP Discovery
+> doc (`https://run.googleapis.com/$discovery/rest?version=v2`), which printing-press rejected
+> (`validation: base_url is required`) because Discovery is not OpenAPI 3.0.
+>
+> **Resolution:** [apis.guru](https://apis.guru/) publishes OpenAPI 3.0 specs for all four
+> GCP and AWS CLIs in v1. No conversion step is needed for those. Azure is the only exception
+> (see the follow-on plan). All `--spec` flags below now point at the apis.guru URL.
+>
+> | CLI | apis.guru spec URL |
+> |---|---|
+> | `cloud-run-admin-pp-cli` | `https://api.apis.guru/v2/specs/googleapis.com/run/v2/openapi.json` |
+> | `cloud-functions-pp-cli` | `https://api.apis.guru/v2/specs/googleapis.com/cloudfunctions/v2/openapi.json` |
+> | `lambda-pp-cli` | `https://api.apis.guru/v2/specs/amazonaws.com/lambda/2015-03-31/openapi.json` |
+> | `apprunner-pp-cli` | `https://api.apis.guru/v2/specs/amazonaws.com/apprunner/2020-05-15/openapi.json` |
+
 ### Task 6.1: Verify Go 1.26+ + install printing-press
 
 **Files:** none (environment setup)
@@ -2711,7 +2726,10 @@ Expected: shows usage.
 
 - [ ] **Step 1: Identify the spec URL**
 
-Cloud Run Admin API v2 Discovery doc: `https://run.googleapis.com/$discovery/rest?version=v2`
+Cloud Run Admin API v2 OpenAPI 3.0 spec via apis.guru:
+`https://api.apis.guru/v2/specs/googleapis.com/run/v2/openapi.json`
+
+(Do not use the GCP Discovery URL — printing-press requires OpenAPI 3.0.)
 
 - [ ] **Step 2: Run press in a scratch directory**
 
@@ -2720,7 +2738,7 @@ Run:
 mkdir -p /tmp/press-readycheck-cloud-run
 cd /tmp/press-readycheck-cloud-run
 printing-press generate \
-  --spec 'https://run.googleapis.com/$discovery/rest?version=v2' \
+  --spec 'https://api.apis.guru/v2/specs/googleapis.com/run/v2/openapi.json' \
   --output .
 ```
 Expected: press generates a CLI scaffold without crashing.
@@ -2732,7 +2750,9 @@ Expected: builds (may show warnings; building means the spec parse + Go code-gen
 
 - [ ] **Step 4: If failure: STOP**
 
-If press fails on Cloud Run discovery doc: spec format mismatch. Decide whether to file an upstream issue with mvanhorn or hand-author press patches. Document the failure mode in `docs/sprints/v1.md` under "Press-readiness check" and stop work on this CLI.
+If press still fails on the apis.guru spec: the spec may have a field press doesn't
+accept. Document the exact error in `docs/sprints/v1.md` under "Press-readiness check"
+and stop. Try `printing-press generate --help` to check for flags that relax validation.
 
 If success: proceed to Task 6.3.
 
@@ -2751,7 +2771,7 @@ Run: `mkdir -p /Users/shubhan/infra-planning-cli/library/gcp/cloud-run-admin`
 
 Run:
 ```bash
-etag=$(curl -sI 'https://run.googleapis.com/$discovery/rest?version=v2' | grep -i '^etag:' | awk '{print $2}' | tr -d '\r"')
+etag=$(curl -sI 'https://api.apis.guru/v2/specs/googleapis.com/run/v2/openapi.json' | grep -i '^etag:' | awk '{print $2}' | tr -d '\r"')
 echo "$etag"
 ```
 Expected: a string like `W/"abc123..."`. If empty, set to `unknown` for now.
@@ -2765,8 +2785,8 @@ cli: cloud-run-admin-pp-cli
 cloud: gcp
 service: cloud-run-admin
 press_version: <fill in after Task 6.4>
-press_command: "printing-press generate --spec https://run.googleapis.com/$discovery/rest?version=v2 --output library/gcp/cloud-run-admin/"
-spec_url: https://run.googleapis.com/$discovery/rest?version=v2
+press_command: "printing-press generate --spec https://api.apis.guru/v2/specs/googleapis.com/run/v2/openapi.json --output library/gcp/cloud-run-admin/"
+spec_url: https://api.apis.guru/v2/specs/googleapis.com/run/v2/openapi.json
 spec_version: v2
 spec_etag: <paste from Step 2 or "unknown">
 generated_at: <ISO8601 timestamp filled by Task 6.4>
@@ -2793,7 +2813,7 @@ Run:
 ```bash
 cd /Users/shubhan/infra-planning-cli
 printing-press generate \
-  --spec 'https://run.googleapis.com/$discovery/rest?version=v2' \
+  --spec 'https://api.apis.guru/v2/specs/googleapis.com/run/v2/openapi.json' \
   --output library/gcp/cloud-run-admin/
 ```
 Expected: press generates `cmd/`, `internal/`, `README.md`, `AGENTS.md`, `go.mod`, `go.sum`, `.golangci.yml`, and `tests/` under the target directory.
@@ -3133,9 +3153,9 @@ Append (or fill in if section exists):
   document tradeoff X.)
 
 ### Open questions to resolve before follow-on
-- Did press handle GCP discovery doc cleanly? (Spec open question #1)
-- Was the Claude Code dependency (spec open question #2) blocking?
-- Did naming collision with mvanhorn's cloud-run-admin cause confusion? (#4)
+- Did press handle the apis.guru OpenAPI 3.0 spec cleanly, or were patches needed?
+- Were any Azure specs missing from apis.guru beyond container-apps? (Affects follow-on plan scope.)
+- Did naming collision with mvanhorn's cloud-run-admin cause confusion?
 ```
 
 - [ ] **Step 2: Commit**
