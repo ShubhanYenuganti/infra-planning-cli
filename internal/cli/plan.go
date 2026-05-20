@@ -4,7 +4,6 @@ import (
 	"fmt"
 
 	"github.com/spf13/cobra"
-	_ "gopkg.in/yaml.v3"
 )
 
 type planOptions struct {
