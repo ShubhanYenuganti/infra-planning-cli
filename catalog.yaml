@@ -7,7 +7,7 @@ clis:
     path: library/gcp/cloud-run-admin
     binary: cloud-run-admin-pp-cli
     install: github.com/ShubhanYenuganti/infra-press/library/gcp/cloud-run-admin/cmd/cloud-run-admin-pp-cli
-    status: bootstrapping
+    status: preview
     press_version: v1.3.2
     spec_version: v2
     spec_url: https://api.apis.guru/v2/specs/googleapis.com/run/v2/openapi.json
