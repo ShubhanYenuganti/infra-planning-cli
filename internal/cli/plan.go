@@ -7,6 +7,7 @@ import (
 	"github.com/ShubhanYenuganti/infra-planning-cli/internal/discovery"
 	"github.com/ShubhanYenuganti/infra-planning-cli/internal/planner"
 	"github.com/ShubhanYenuganti/infra-planning-cli/internal/render"
+	"github.com/ShubhanYenuganti/infra-planning-cli/internal/web"
 	"github.com/spf13/cobra"
 )
 
@@ -30,7 +31,8 @@ func newPlanCommand() *cobra.Command {
 			}
 
 			req := planner.ClassifyRequest(args[0])
-			plan := planner.BuildPlan(req, repo)
+			fetcher := web.New()
+			plan := planner.BuildPlan(req, repo, fetcher)
 
 			if plan.Metadata.ClarificationNeeded {
 				fmt.Fprintln(cmd.ErrOrStderr(), plan.Metadata.ClarificationQuestion)

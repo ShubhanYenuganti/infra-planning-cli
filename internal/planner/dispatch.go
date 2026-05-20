@@ -6,11 +6,12 @@ import (
 
 	"github.com/ShubhanYenuganti/infra-planning-cli/internal/discovery"
 	"github.com/ShubhanYenuganti/infra-planning-cli/internal/docs"
+	"github.com/ShubhanYenuganti/infra-planning-cli/internal/web"
 )
 
 const currentSchemaVersion = 1
 
-func BuildPlan(req Request, repo discovery.RepoContext) Plan {
+func BuildPlan(req Request, repo discovery.RepoContext, fetcher *web.Fetcher) Plan {
 	now := time.Now().UTC()
 
 	conflicts := DetectConflicts(repo)
@@ -52,7 +53,7 @@ func BuildPlan(req Request, repo discovery.RepoContext) Plan {
 	plan.Metadata.Domain = req.PrimaryDomain
 	plan.Metadata.Confidence = computeConfidence(req.PrimaryDomain, repo.Evidence, conflicts)
 	plan.Metadata.Conflicts = conflicts
-	plan.Metadata.Evidence = combineEvidence(repo.Evidence, docs.AWSDocsForDomain(string(req.PrimaryDomain)))
+	plan.Metadata.Evidence = combineEvidence(repo.Evidence, docs.AWSDocsForDomain(string(req.PrimaryDomain)), fetcher)
 	plan.Metadata.CostHints = CostHintsForDomain(req.PrimaryDomain)
 	clarQ := ClarificationQuestion(req)
 	plan.Metadata.ClarificationNeeded = clarQ != ""
@@ -84,7 +85,7 @@ func computeConfidence(domain Domain, repoEv []discovery.Evidence, conflicts []C
 	return ConfidenceLow
 }
 
-func combineEvidence(repoEv []discovery.Evidence, docLinks []docs.DocLink) []Evidence {
+func combineEvidence(repoEv []discovery.Evidence, docLinks []docs.DocLink, fetcher *web.Fetcher) []Evidence {
 	out := make([]Evidence, 0, len(repoEv)+len(docLinks))
 	for _, ev := range repoEv {
 		out = append(out, Evidence{
@@ -95,12 +96,20 @@ func combineEvidence(repoEv []discovery.Evidence, docLinks []docs.DocLink) []Evi
 		})
 	}
 	for _, link := range docLinks {
-		out = append(out, Evidence{
+		ev := Evidence{
 			Source: "docs",
 			Kind:   "official-docs",
 			Title:  link.Title,
 			URL:    link.URL,
-		})
+		}
+		if fetcher != nil {
+			status, fetchedAt, err := fetcher.Fetch(link.URL)
+			if err == nil {
+				ev.Status = status
+				ev.FetchedAt = fetchedAt
+			}
+		}
+		out = append(out, ev)
 	}
 	return out
 }

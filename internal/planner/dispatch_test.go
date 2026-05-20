@@ -13,7 +13,7 @@ func TestBuildPlanNetworkingHighConfidence(t *testing.T) {
 		Evidence:      []discovery.Evidence{{Path: "main.tf", Kind: "aws-iac", Snippet: `resource "aws_vpc"`}},
 		DetectedTools: []string{"terraform"},
 	}
-	plan := BuildPlan(req, repo)
+	plan := BuildPlan(req, repo, nil)
 	if plan.Metadata.Domain != DomainNetworking {
 		t.Fatalf("domain = %q", plan.Metadata.Domain)
 	}
@@ -30,7 +30,7 @@ func TestBuildPlanNetworkingHighConfidence(t *testing.T) {
 
 func TestBuildPlanNetworkingMediumWithoutEvidence(t *testing.T) {
 	req := ClassifyRequest("provision a vpc")
-	plan := BuildPlan(req, discovery.RepoContext{})
+	plan := BuildPlan(req, discovery.RepoContext{}, nil)
 	if plan.Metadata.Confidence != ConfidenceMedium {
 		t.Fatalf("confidence = %q, want medium", plan.Metadata.Confidence)
 	}
@@ -38,7 +38,7 @@ func TestBuildPlanNetworkingMediumWithoutEvidence(t *testing.T) {
 
 func TestBuildPlanComputeLow(t *testing.T) {
 	req := ClassifyRequest("deploy a lambda worker")
-	plan := BuildPlan(req, discovery.RepoContext{})
+	plan := BuildPlan(req, discovery.RepoContext{}, nil)
 	if plan.Metadata.Domain != DomainCompute {
 		t.Fatalf("domain = %q", plan.Metadata.Domain)
 	}
@@ -52,7 +52,7 @@ func TestBuildPlanComputeLow(t *testing.T) {
 
 func TestBuildPlanDatabaseLow(t *testing.T) {
 	req := ClassifyRequest("create a postgres rds database")
-	plan := BuildPlan(req, discovery.RepoContext{})
+	plan := BuildPlan(req, discovery.RepoContext{}, nil)
 	if plan.Metadata.Domain != DomainDatabase {
 		t.Fatalf("domain = %q", plan.Metadata.Domain)
 	}
@@ -63,7 +63,7 @@ func TestBuildPlanDatabaseLow(t *testing.T) {
 
 func TestBuildPlanConflictsNonNilSlice(t *testing.T) {
 	req := ClassifyRequest("provision a vpc")
-	plan := BuildPlan(req, discovery.RepoContext{})
+	plan := BuildPlan(req, discovery.RepoContext{}, nil)
 	if plan.Metadata.Conflicts == nil {
 		t.Fatalf("conflicts must be non-nil empty slice for stable wire shape")
 	}
@@ -71,7 +71,7 @@ func TestBuildPlanConflictsNonNilSlice(t *testing.T) {
 
 func TestBuildPlanCostHintsNonNil(t *testing.T) {
 	req := ClassifyRequest("provision a vpc")
-	plan := BuildPlan(req, discovery.RepoContext{})
+	plan := BuildPlan(req, discovery.RepoContext{}, nil)
 	if plan.Metadata.CostHints == nil {
 		t.Fatalf("cost_hints must be non-nil empty slice for stable wire shape")
 	}
@@ -79,7 +79,7 @@ func TestBuildPlanCostHintsNonNil(t *testing.T) {
 
 func TestBuildPlanAlreadySatisfiedDefaultFalse(t *testing.T) {
 	req := ClassifyRequest("provision a vpc")
-	plan := BuildPlan(req, discovery.RepoContext{})
+	plan := BuildPlan(req, discovery.RepoContext{}, nil)
 	if plan.Metadata.AlreadySatisfied {
 		t.Fatalf("already_satisfied must be false when no matching snippet")
 	}
@@ -87,7 +87,7 @@ func TestBuildPlanAlreadySatisfiedDefaultFalse(t *testing.T) {
 
 func TestBuildPlanClarificationNeeded(t *testing.T) {
 	req := Request{PrimaryDomain: DomainUnknown, Raw: "do something"}
-	plan := BuildPlan(req, discovery.RepoContext{})
+	plan := BuildPlan(req, discovery.RepoContext{}, nil)
 	if !plan.Metadata.ClarificationNeeded {
 		t.Fatalf("clarification_needed must be true for DomainUnknown")
 	}
