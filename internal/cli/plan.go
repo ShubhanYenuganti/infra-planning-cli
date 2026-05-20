@@ -12,9 +12,10 @@ import (
 )
 
 type planOptions struct {
-	repo string
-	out  string
-	json bool
+	repo  string
+	out   string
+	json  bool
+	noWeb bool
 }
 
 func newPlanCommand() *cobra.Command {
@@ -30,8 +31,15 @@ func newPlanCommand() *cobra.Command {
 				return fmt.Errorf("discover repo: %w", err)
 			}
 
+			if opts.json && opts.out != "" {
+				return fmt.Errorf("--json and --out are mutually exclusive")
+			}
+
 			req := planner.ClassifyRequest(args[0])
-			fetcher := web.New()
+			var fetcher *web.Fetcher
+			if !opts.noWeb {
+				fetcher = web.New()
+			}
 			plan := planner.BuildPlan(req, repo, fetcher)
 
 			if plan.Metadata.ClarificationNeeded {
@@ -62,5 +70,6 @@ func newPlanCommand() *cobra.Command {
 	cmd.Flags().StringVar(&opts.repo, "repo", ".", "repository path to inspect")
 	cmd.Flags().StringVar(&opts.out, "out", "", "optional output markdown path")
 	cmd.Flags().BoolVar(&opts.json, "json", false, "emit JSON payload to stdout instead of writing a file")
+	cmd.Flags().BoolVar(&opts.noWeb, "no-web", false, "skip HTTP fetches for docs evidence")
 	return cmd
 }
