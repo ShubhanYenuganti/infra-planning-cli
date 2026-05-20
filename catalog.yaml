@@ -1,0 +1,18 @@
+version: 1
+clis: []
+# As sprints ship CLIs, entries appear here per the schema:
+#
+# - name: lambda-pp-cli
+#   cloud: aws
+#   service: lambda
+#   paradigm: serverless
+#   path: library/aws/lambda
+#   binary: lambda-pp-cli
+#   install: github.com/ShubhanYenuganti/infra-press/library/aws/lambda
+#   status: stable          # bootstrapping | preview | stable
+#   press_version: v1.4.2
+#   spec_version: 2024-11-01
+#   daily_commands: [functions list, functions create, functions invoke]
+#   compound_commands: [stale, cold-starts, unused-layers, permissions-audit]
+#   known_gaps:
+#     - "First use requires IAM exec role; use --auto-role"
