@@ -49,15 +49,15 @@ type Metadata struct {
 }
 
 type Step struct {
-	Title string
-	Body  string
+	Title string `yaml:"title" json:"title"`
+	Body  string `yaml:"body"  json:"body"`
 }
 
 type Plan struct {
-	Metadata        Metadata
-	Title           string
-	ProblemSummary  string
-	RecommendedPath string
-	Steps           []Step
-	Verification    []string
+	Metadata        Metadata `yaml:"metadata"         json:"metadata"`
+	Title           string   `yaml:"title"            json:"title"`
+	ProblemSummary  string   `yaml:"problem_summary"  json:"problem_summary"`
+	RecommendedPath string   `yaml:"recommended_path" json:"recommended_path"`
+	Steps           []Step   `yaml:"steps"            json:"steps"`
+	Verification    []string `yaml:"verification"     json:"verification"`
 }
