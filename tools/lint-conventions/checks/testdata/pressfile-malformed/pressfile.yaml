@@ -1,0 +1,3 @@
+cli: test-pp-cli
+  this: is bad yaml
+   nested: wrong

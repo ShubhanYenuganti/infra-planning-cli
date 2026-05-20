@@ -1,0 +1,7 @@
+cli: test-pp-cli
+cloud: gcp
+service: test
+press_version: v1.4.2
+spec_url: https://example.com/spec.json
+generated_at: 2026-05-20T00:00:00Z
+patches: []

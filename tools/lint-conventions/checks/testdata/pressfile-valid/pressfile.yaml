@@ -1,0 +1,10 @@
+cli: test-pp-cli
+cloud: gcp
+service: test
+press_version: v1.4.2
+press_command: "printing-press generate --spec https://..."
+spec_url: https://example.com/spec.json
+spec_version: 2024-01-01
+spec_etag: "abc123"
+generated_at: 2026-05-20T00:00:00Z
+patches: []
