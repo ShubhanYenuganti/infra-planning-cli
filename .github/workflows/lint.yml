@@ -1,0 +1,26 @@
+name: lint
+
+on:
+  pull_request:
+    paths:
+      - 'library/**'
+      - 'tools/lint-conventions/**'
+      - '.github/workflows/lint.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'library/**'
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version: '1.26'
+      - name: Build lint-conventions
+        working-directory: tools/lint-conventions
+        run: go build -o /tmp/lint-conventions .
+      - name: Run lint on library/
+        run: /tmp/lint-conventions --ci library/

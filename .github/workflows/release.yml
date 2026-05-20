@@ -1,0 +1,43 @@
+name: release
+
+on:
+  push:
+    tags:
+      - '*-pp-cli/v*.*.*'
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version: '1.26'
+      - name: Parse tag
+        id: parse
+        run: |
+          tag="${GITHUB_REF#refs/tags/}"
+          cli="${tag%%/*}"
+          version="${tag##*/}"
+          echo "cli=$cli" >> "$GITHUB_OUTPUT"
+          echo "version=$version" >> "$GITHUB_OUTPUT"
+          path=$(yq ".clis[] | select(.name == \"$cli\") | .path" catalog.yaml)
+          echo "path=$path" >> "$GITHUB_OUTPUT"
+      - name: Build binaries (4 platforms)
+        run: |
+          cli=${{ steps.parse.outputs.cli }}
+          path=${{ steps.parse.outputs.path }}
+          mkdir -p /tmp/release
+          cd "$path/cmd/$cli"
+          for os in darwin linux; do
+            for arch in amd64 arm64; do
+              GOOS=$os GOARCH=$arch go build -o "/tmp/release/${cli}-${os}-${arch}"
+            done
+          done
+      - name: Create GitHub release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: /tmp/release/*
+          tag_name: ${{ github.ref_name }}

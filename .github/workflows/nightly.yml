@@ -1,0 +1,34 @@
+name: nightly
+
+on:
+  schedule:
+    - cron: '17 7 * * *'
+  workflow_dispatch:
+
+jobs:
+  build-all:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version: '1.26'
+      - name: Build every CLI from scratch
+        run: |
+          fail=0
+          for cli_path in $(yq '.clis[].path' catalog.yaml); do
+            for cmd_dir in "$cli_path"/cmd/*/; do
+              if ! (cd "$cmd_dir" && go build .); then
+                echo "FAIL: $cmd_dir" >&2
+                fail=1
+              fi
+            done
+          done
+          exit "$fail"
+      - name: Open issue on failure
+        if: failure()
+        uses: actions-cool/issues-helper@v3
+        with:
+          actions: 'create-issue'
+          title: 'nightly build failed on ${{ github.run_id }}'
+          body: 'See run: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}'

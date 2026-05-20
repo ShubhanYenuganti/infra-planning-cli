@@ -1,0 +1,29 @@
+name: golden
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  golden:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version: '1.26'
+      - name: Build all CLIs in catalog
+        run: |
+          for cli_path in $(yq '.clis[].path' catalog.yaml); do
+            (
+              cd "$cli_path"
+              for cmd_dir in cmd/*/; do
+                binary=$(basename "$cmd_dir")
+                (cd "$cmd_dir" && go build -o "$binary")
+              done
+            )
+          done
+      - name: Run golden tests
+        working-directory: tests/golden
+        run: go test -v ./...
