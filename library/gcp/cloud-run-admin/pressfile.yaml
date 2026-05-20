@@ -1,0 +1,12 @@
+cli: cloud-run-admin-pp-cli
+cloud: gcp
+service: cloud-run-admin
+press_version: v1.3.2
+press_command: "printing-press generate --spec https://api.apis.guru/v2/specs/googleapis.com/run/v2/openapi.json --output library/gcp/cloud-run-admin/ --force"
+spec_url: https://api.apis.guru/v2/specs/googleapis.com/run/v2/openapi.json
+spec_version: v2
+spec_etag: "e3c49030d6657c77f91ff3f4fbec5c97"
+generated_at: 2026-05-20T20:08:47Z
+patches:
+  - path: patches/fix-unused-imports.go
+    reason: "Press v1.3.2 emits unused path/filepath and time imports in helpers.go; removed to satisfy go build."
