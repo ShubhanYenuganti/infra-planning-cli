@@ -86,9 +86,14 @@ func TestPlanClarificationNeeded(t *testing.T) {
 	if err := cmd.Execute(); err != nil {
 		t.Fatalf("plan command failed: %v", err)
 	}
-	// If clarification was needed, stdout should be empty (no plan output).
-	// If clarification was not needed (domain=unknown still produces a plan), that's also fine.
-	// Either way the command must succeed (return nil).
+	// A vague request maps to DomainUnknown → ClarificationNeeded=true.
+	// The question should appear on stderr and stdout should be empty.
+	if stderr.Len() == 0 {
+		t.Error("expected clarification question on stderr, got nothing")
+	}
+	if stdout.Len() != 0 {
+		t.Errorf("expected no plan output on stdout when clarification needed, got: %s", stdout.String())
+	}
 }
 
 func TestPlanInvalidRepo(t *testing.T) {
