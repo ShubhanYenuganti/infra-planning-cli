@@ -84,3 +84,14 @@ func TestBuildPlanAlreadySatisfiedDefaultFalse(t *testing.T) {
 		t.Fatalf("already_satisfied must be false when no matching snippet")
 	}
 }
+
+func TestBuildPlanClarificationNeeded(t *testing.T) {
+	req := Request{PrimaryDomain: DomainUnknown, Raw: "do something"}
+	plan := BuildPlan(req, discovery.RepoContext{})
+	if !plan.Metadata.ClarificationNeeded {
+		t.Fatalf("clarification_needed must be true for DomainUnknown")
+	}
+	if plan.Metadata.ClarificationQuestion == "" {
+		t.Fatalf("clarification_question must be non-empty for DomainUnknown")
+	}
+}

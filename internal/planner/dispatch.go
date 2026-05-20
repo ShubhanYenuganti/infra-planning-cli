@@ -41,6 +41,9 @@ func BuildPlan(req Request, repo discovery.RepoContext) Plan {
 	plan.Metadata.Conflicts = conflicts
 	plan.Metadata.Evidence = combineEvidence(repo.Evidence, docs.AWSDocsForDomain(string(req.PrimaryDomain)))
 	plan.Metadata.CostHints = CostHintsForDomain(req.PrimaryDomain)
+	clarQ := ClarificationQuestion(req)
+	plan.Metadata.ClarificationNeeded = clarQ != ""
+	plan.Metadata.ClarificationQuestion = clarQ
 	plan.Metadata.AlreadySatisfied = satisfied
 	if plan.Metadata.Prerequisites == nil {
 		plan.Metadata.Prerequisites = []string{}
