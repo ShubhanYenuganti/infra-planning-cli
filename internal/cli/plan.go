@@ -2,7 +2,11 @@ package cli
 
 import (
 	"fmt"
+	"os"
 
+	"github.com/ShubhanYenuganti/infra-planning-cli/internal/discovery"
+	"github.com/ShubhanYenuganti/infra-planning-cli/internal/planner"
+	"github.com/ShubhanYenuganti/infra-planning-cli/internal/render"
 	"github.com/spf13/cobra"
 )
 
@@ -20,8 +24,36 @@ func newPlanCommand() *cobra.Command {
 		Short: "Turn an infra request into a markdown execution plan",
 		Args:  cobra.ExactArgs(1),
 		RunE: func(cmd *cobra.Command, args []string) error {
-			_, _ = fmt.Fprintf(cmd.OutOrStdout(), "request: %s\nrepo: %s\nout: %s\njson: %v\n", args[0], opts.repo, opts.out, opts.json)
-			return nil
+			repo, err := discovery.DiscoverRepo(opts.repo)
+			if err != nil {
+				return fmt.Errorf("discover repo: %w", err)
+			}
+
+			req := planner.ClassifyRequest(args[0])
+			plan := planner.BuildPlan(req, repo)
+
+			if plan.Metadata.ClarificationNeeded {
+				fmt.Fprintln(cmd.ErrOrStderr(), plan.Metadata.ClarificationQuestion)
+				return nil
+			}
+
+			if opts.json {
+				b, err := render.JSONPlan(plan)
+				if err != nil {
+					return fmt.Errorf("render json: %w", err)
+				}
+				_, err = fmt.Fprintf(cmd.OutOrStdout(), "%s\n", b)
+				return err
+			}
+
+			md := render.MarkdownPlan(plan)
+
+			if opts.out == "" {
+				_, err = fmt.Fprint(cmd.OutOrStdout(), md)
+				return err
+			}
+
+			return os.WriteFile(opts.out, []byte(md), 0644)
 		},
 	}
 
