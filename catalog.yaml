@@ -46,6 +46,21 @@ clis:
     compound_commands: []
     known_gaps:
       - "sync/search/sql return not-yet-implemented (full backend in v1.1)"
+  - name: apprunner-pp-cli
+    cloud: aws
+    service: apprunner
+    paradigm: serverless-containers
+    path: library/aws/apprunner
+    binary: apprunner-pp-cli
+    install: github.com/ShubhanYenuganti/infra-press/library/aws/apprunner/cmd/apprunner-pp-cli
+    status: bootstrapping
+    press_version: v1.3.2
+    spec_version: "2020-05-15"
+    spec_url: https://api.apis.guru/v2/specs/amazonaws.com/apprunner/2020-05-15/openapi.json
+    daily_commands: [api, doctor, export]
+    compound_commands: []
+    known_gaps:
+      - "sync/search/sql return not-yet-implemented (full backend in v1.1)"
 # As sprints ship CLIs, entries appear here per the schema:
 #
 # - name: lambda-pp-cli
