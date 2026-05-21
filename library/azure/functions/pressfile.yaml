@@ -1,0 +1,26 @@
+cli: functions-pp-cli
+cloud: azure
+service: functions
+press_version: v1.3.2
+press_command: "scripts/spec-to-openapi3.sh https://api.apis.guru/v2/specs/azure.com/web-WebApps/2018-11-01/swagger.json /tmp/azure-functions-openapi3.json && printing-press generate --spec /tmp/azure-functions-openapi3.json --output library/azure/functions/ --force"
+spec_url: https://api.apis.guru/v2/specs/azure.com/web-WebApps/2018-11-01/swagger.json
+spec_origin_format: openapi-2.0
+spec_pipeline: ["swagger2openapi"]
+spec_version: "2018-11-01"
+spec_etag: "W/\"7e9c9585e5cde43d472e708054bb8c0c\""
+generated_at: 2026-05-21T03:30:59Z
+patches:
+  - path: internal/cli/sync.go
+    reason: "Press generated experimental sync plumbing; v1 convention ships sync as a not-yet-implemented v1.1 stub."
+  - path: internal/cli/search.go
+    reason: "Press generated experimental search plumbing; v1 convention ships search as a not-yet-implemented v1.1 stub."
+  - path: internal/cli/sql.go
+    reason: "Press does not generate sql; convention requires the subcommand as a not-yet-implemented v1.1 stub."
+  - path: internal/mcp/tools.go
+    reason: "Press emits ~/.local/share/<cli>/data.db; convention requires ~/.infra-press/<cli>.db."
+  - path: internal/cli/helpers.go
+    reason: "CLI defaultDBPath adjusted to the same ~/.infra-press/<cli>.db convention."
+  - path: internal/cli/root.go
+    reason: "Version string set to v0.1.0 (SemVer); template stripped to bare {{.Version}}; unknown-command wrapped in usageErr for exit code 2; sync/search/sql stubs registered."
+  - path: AGENTS.md
+    reason: "Press does not generate AGENTS.md; written per-CLI to satisfy agents-md-non-trivial check and document the OpenAPI 2.0 to 3.0 conversion step."
