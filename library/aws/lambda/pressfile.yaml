@@ -8,6 +8,8 @@ spec_version: "2015-03-31"
 spec_etag: "b6686308e672bb68d0879410af81b1c3"
 generated_at: "2026-05-20T00:00:00Z"
 patches:
+  - path: internal/cli/search.go
+    reason: "Press generated Use: \"search <query>\"; stripped to bare Use: \"search\" to satisfy lint check."
   - path: internal/cli/sql.go
     reason: "Press does not generate sql subcommand; stub satisfies convention check, full SQL passthrough in v1.1."
   - path: internal/cli/root.go
