@@ -43,6 +43,20 @@ echo "$catalog" | yq '.clis[] | select(.status == "stable") | .name + " " + .pre
   fi
 done
 
+# Azure spec conversion (OpenAPI 2.0 → 3.0)
+# Required only for regenerating Azure CLIs (functions-pp-cli, container-apps-pp-cli).
+# Skip if you only build/use already-generated Azure CLIs.
+if ! command -v swagger2openapi >/dev/null 2>&1; then
+  if command -v npm >/dev/null 2>&1; then
+    echo "Installing swagger2openapi (Azure spec converter)..."
+    if ! npm install -g swagger2openapi; then
+      echo "WARN: failed to install swagger2openapi; install it manually if you plan to regenerate Azure CLIs" >&2
+    fi
+  else
+    echo "WARN: npm not found; install Node.js if you plan to regenerate Azure CLIs"
+  fi
+fi
+
 echo
 echo "Done. Add to PATH:"
 echo "  export PATH=\"$INSTALL_DIR:\$PATH\""
