@@ -7,7 +7,8 @@ spec_url: https://api.apis.guru/v2/specs/azure.com/web-WebApps/2018-11-01/swagge
 spec_origin_format: openapi-2.0
 spec_pipeline: ["swagger2openapi"]
 spec_version: "2018-11-01"
-spec_etag: "W/\"7e9c9585e5cde43d472e708054bb8c0c\""
+spec_sha256: 1ccf3f3a86001a991c874a16cd5a67a55442cdb7bb66cb07a40a811af9bfa54c
+vendored_spec: tests/fixtures/specs/functions-pp-cli.spec.json
 generated_at: 2026-05-21T03:30:59Z
 patches:
   - path: internal/cli/sync.go
