@@ -1,0 +1,51 @@
+version: 2
+project_name: container-apps-pp-cli
+changelog:
+  disable: true
+builds:
+  - id: container-apps-pp-cli
+    main: ./cmd/container-apps-pp-cli
+    binary: container-apps-pp-cli
+    env:
+      - CGO_ENABLED=0
+    ldflags:
+      - -s -w -X container-apps-pp-cli/internal/cli.version={{ .Version }}
+    targets:
+      - darwin_amd64
+      - darwin_arm64
+      - linux_amd64
+      - linux_arm64
+      - windows_amd64
+      - windows_arm64
+  - id: container-apps-pp-mcp
+    main: ./cmd/container-apps-pp-mcp
+    binary: container-apps-pp-mcp
+    env:
+      - CGO_ENABLED=0
+    ldflags:
+      - -s -w
+    targets:
+      - darwin_amd64
+      - darwin_arm64
+      - linux_amd64
+      - linux_arm64
+      - windows_amd64
+      - windows_arm64
+archives:
+  - formats: [tar.gz]
+    name_template: "{{ .ProjectName }}_{{ .Version }}_{{ .Os }}_{{ .Arch }}"
+    format_overrides:
+      - goos: windows
+        formats: [zip]
+checksum:
+  name_template: checksums.txt
+brews:
+  - name: container-apps-pp-cli
+    repository:
+      owner: shubhan-yenuganti
+      name: homebrew-tap
+    homepage: "https://github.com/shubhan-yenuganti/container-apps-pp-cli"
+    description: ""
+    install: |
+      bin.install "container-apps-pp-cli"
+      bin.install "container-apps-pp-mcp"

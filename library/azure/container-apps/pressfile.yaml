@@ -1,0 +1,28 @@
+cli: container-apps-pp-cli
+cloud: azure
+service: container-apps
+press_version: v1.3.2
+press_command: "scripts/spec-to-openapi3.sh https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/specification/app/resource-manager/Microsoft.App/ContainerApps/stable/2024-03-01/ContainerApps.json /tmp/azure-container-apps-openapi3.json && printing-press generate --spec /tmp/azure-container-apps-openapi3.json --output library/azure/container-apps/ --force"
+spec_url: https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/specification/app/resource-manager/Microsoft.App/ContainerApps/stable/2024-03-01/ContainerApps.json
+spec_origin_format: openapi-2.0
+spec_pipeline: ["swagger2openapi"]
+spec_version: "2024-03-01"
+spec_etag: "W/\"16f27a72b238149abb918d1cfad8086f77baa7fedd1245c72e37b9dfab425ebe\""
+generated_at: 2026-05-21T03:46:15Z
+patches:
+  - path: scripts/spec-to-openapi3.sh
+    reason: "Azure Container Apps spec uses sibling JSON refs; wrapper now resolves external refs with swagger2openapi -r."
+  - path: internal/cli/sync.go
+    reason: "Press does not generate sync; convention requires the subcommand as a not-yet-implemented v1.1 stub."
+  - path: internal/cli/search.go
+    reason: "Press does not generate search; convention requires the subcommand as a not-yet-implemented v1.1 stub."
+  - path: internal/cli/sql.go
+    reason: "Press does not generate sql; convention requires the subcommand as a not-yet-implemented v1.1 stub."
+  - path: internal/mcp/tools.go
+    reason: "Press emits ~/.local/share/<cli>/data.db; convention requires ~/.infra-press/<cli>.db."
+  - path: internal/cli/root.go
+    reason: "Version string set to v0.1.0 (SemVer); template stripped to bare {{.Version}}; unknown-command wrapped in usageErr for exit code 2; sync/search/sql stubs registered."
+  - path: internal/cli/helpers.go
+    reason: "Removed unused imports emitted by press for this spec."
+  - path: AGENTS.md
+    reason: "Press does not generate AGENTS.md; written per-CLI to satisfy agents-md-non-trivial check and document the OpenAPI 2.0 to 3.0 conversion step."

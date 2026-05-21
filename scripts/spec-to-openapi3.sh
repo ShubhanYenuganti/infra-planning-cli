@@ -22,7 +22,8 @@ if ! command -v swagger2openapi >/dev/null 2>&1; then
   exit 3
 fi
 
-# swagger2openapi accepts URL or local path as positional arg.
+# swagger2openapi accepts URL or local path as positional arg. Resolve sibling
+# files too; Azure specs often split shared definitions across JSON files.
 echo "Converting $INPUT -> $OUTPUT (OpenAPI 2.0 -> 3.0)..." >&2
-swagger2openapi "$INPUT" -o "$OUTPUT"
+swagger2openapi -r "$INPUT" -o "$OUTPUT"
 echo "Wrote $OUTPUT" >&2
