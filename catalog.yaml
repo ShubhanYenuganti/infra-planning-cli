@@ -85,7 +85,7 @@ clis:
     path: library/azure/container-apps
     binary: container-apps-pp-cli
     install: github.com/ShubhanYenuganti/infra-press/library/azure/container-apps/cmd/container-apps-pp-cli
-    status: bootstrapping
+    status: preview
     press_version: v1.3.2
     spec_version: "2024-03-01"
     spec_url: https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/specification/app/resource-manager/Microsoft.App/ContainerApps/stable/2024-03-01/ContainerApps.json
