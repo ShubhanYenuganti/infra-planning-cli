@@ -1,0 +1,18 @@
+cli: lambda-pp-cli
+cloud: aws
+service: lambda
+press_version: v1.3.2
+press_command: "printing-press generate --spec https://api.apis.guru/v2/specs/amazonaws.com/lambda/2015-03-31/openapi.json --output library/aws/lambda/ --force"
+spec_url: https://api.apis.guru/v2/specs/amazonaws.com/lambda/2015-03-31/openapi.json
+spec_version: "2015-03-31"
+spec_etag: "b6686308e672bb68d0879410af81b1c3"
+generated_at: "2026-05-20T00:00:00Z"
+patches:
+  - path: internal/cli/sql.go
+    reason: "Press does not generate sql subcommand; stub satisfies convention check, full SQL passthrough in v1.1."
+  - path: internal/cli/root.go
+    reason: "sql subcommand registered; version string set to v0.1.0 (SemVer); template stripped to bare {{.Version}}; unknown-command wrapped in usageErr for exit code 2."
+  - path: internal/mcp/tools.go
+    reason: "Press emits ~/.local/share/<cli>/data.db; convention requires ~/.infra-press/<cli>.db."
+  - path: AGENTS.md
+    reason: "Press does not generate AGENTS.md; written per-CLI to satisfy agents-md-non-trivial check."

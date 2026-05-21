@@ -31,6 +31,21 @@ clis:
     compound_commands: []
     known_gaps:
       - "sync/search/sql return not-yet-implemented (full backend in v1.1)"
+  - name: lambda-pp-cli
+    cloud: aws
+    service: lambda
+    paradigm: serverless
+    path: library/aws/lambda
+    binary: lambda-pp-cli
+    install: github.com/ShubhanYenuganti/infra-press/library/aws/lambda/cmd/lambda-pp-cli
+    status: bootstrapping
+    press_version: v1.3.2
+    spec_version: "2015-03-31"
+    spec_url: https://api.apis.guru/v2/specs/amazonaws.com/lambda/2015-03-31/openapi.json
+    daily_commands: [api, doctor, export]
+    compound_commands: []
+    known_gaps:
+      - "sync/search/sql return not-yet-implemented (full backend in v1.1)"
 # As sprints ship CLIs, entries appear here per the schema:
 #
 # - name: lambda-pp-cli
