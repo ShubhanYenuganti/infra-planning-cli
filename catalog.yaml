@@ -7,7 +7,7 @@ clis:
     path: library/gcp/cloud-run-admin
     binary: cloud-run-admin-pp-cli
     install: github.com/ShubhanYenuganti/infra-press/library/gcp/cloud-run-admin/cmd/cloud-run-admin-pp-cli
-    status: preview
+    status: stable
     press_version: v1.3.2
     spec_version: v2
     spec_url: https://api.apis.guru/v2/specs/googleapis.com/run/v2/openapi.json
@@ -23,7 +23,7 @@ clis:
     path: library/gcp/cloud-functions
     binary: cloud-functions-pp-cli
     install: github.com/ShubhanYenuganti/infra-press/library/gcp/cloud-functions/cmd/cloud-functions-pp-cli
-    status: preview
+    status: stable
     press_version: v1.3.2
     spec_version: v2
     spec_url: https://api.apis.guru/v2/specs/googleapis.com/cloudfunctions/v2/openapi.json
@@ -38,7 +38,7 @@ clis:
     path: library/aws/lambda
     binary: lambda-pp-cli
     install: github.com/ShubhanYenuganti/infra-press/library/aws/lambda/cmd/lambda-pp-cli
-    status: preview
+    status: stable
     press_version: v1.3.2
     spec_version: "2015-03-31"
     spec_url: https://api.apis.guru/v2/specs/amazonaws.com/lambda/2015-03-31/openapi.json
@@ -53,7 +53,7 @@ clis:
     path: library/aws/apprunner
     binary: apprunner-pp-cli
     install: github.com/ShubhanYenuganti/infra-press/library/aws/apprunner/cmd/apprunner-pp-cli
-    status: preview
+    status: stable
     press_version: v1.3.2
     spec_version: "2020-05-15"
     spec_url: https://api.apis.guru/v2/specs/amazonaws.com/apprunner/2020-05-15/openapi.json
@@ -68,7 +68,7 @@ clis:
     path: library/azure/functions
     binary: functions-pp-cli
     install: github.com/ShubhanYenuganti/infra-press/library/azure/functions/cmd/functions-pp-cli
-    status: preview
+    status: stable
     press_version: v1.3.2
     spec_version: "2018-11-01"
     spec_url: https://api.apis.guru/v2/specs/azure.com/web-WebApps/2018-11-01/swagger.json
@@ -85,7 +85,7 @@ clis:
     path: library/azure/container-apps
     binary: container-apps-pp-cli
     install: github.com/ShubhanYenuganti/infra-press/library/azure/container-apps/cmd/container-apps-pp-cli
-    status: preview
+    status: stable
     press_version: v1.3.2
     spec_version: "2024-03-01"
     spec_url: https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/specification/app/resource-manager/Microsoft.App/ContainerApps/stable/2024-03-01/ContainerApps.json
