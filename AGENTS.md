@@ -7,8 +7,12 @@ services and scheduled jobs across AWS, GCP, Azure.
 
 | Need | CLI | Cloud |
 |---|---|---|
-| Deploy a containerized service | cloud-run-admin-pp-cli | GCP |
-| _(more added as sprints ship)_ | | |
+| Deploy/manage a containerized service | cloud-run-admin-pp-cli | GCP |
+| Deploy/manage a containerized service | apprunner-pp-cli | AWS |
+| Deploy/manage a containerized service | container-apps-pp-cli | Azure |
+| Run a serverless function | cloud-functions-pp-cli | GCP |
+| Run a serverless function | lambda-pp-cli | AWS |
+| Run a serverless function | functions-pp-cli | Azure |
 
 For storage, IAM, networking, databases, secrets, and Kubernetes: fall back to
 `aws`, `gcloud`, or `az`. See the "Known fallbacks" section below.
