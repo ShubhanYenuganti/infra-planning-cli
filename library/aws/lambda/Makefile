@@ -1,7 +1,7 @@
 .PHONY: build test lint install clean
 
 build:
-	go build -o bin/aws-lambda-pp-cli ./cmd/aws-lambda-pp-cli
+	go build -o bin/lambda-pp-cli ./cmd/lambda-pp-cli
 
 test:
 	go test ./...
@@ -10,7 +10,7 @@ lint:
 	golangci-lint run
 
 install:
-	go install ./cmd/aws-lambda-pp-cli
+	go install ./cmd/lambda-pp-cli
 
 clean:
 	rm -rf bin/
