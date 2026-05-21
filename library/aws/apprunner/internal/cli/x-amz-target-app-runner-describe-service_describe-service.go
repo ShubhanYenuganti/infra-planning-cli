@@ -19,7 +19,7 @@ func newXAmzTargetAppRunnerDescribeServiceDescribeServiceCmd(flags *rootFlags) *
 		Use:   "describe-service",
 		Aliases: []string{"create"},
 		Short: "Return a full description of an App Runner service.",
-		Example: "  aws-app-runner-pp-cli x-amz-target-app-runner-describe-service describe-service",
+		Example: "  apprunner-pp-cli x-amz-target-app-runner-describe-service describe-service",
 		RunE: func(cmd *cobra.Command, args []string) error {
 			if !stdinBody {
 			}

@@ -19,7 +19,7 @@ func newXAmzTargetAppRunnerDeleteVpcIngressConnectionDeleteVpcIngressConnectionC
 		Use:   "delete-vpc-ingress-connection",
 		Aliases: []string{"create"},
 		Short: "<p>Delete an App Runner VPC Ingress Connection resource that's associated with an App Runner service. The VPC...",
-		Example: "  aws-app-runner-pp-cli x-amz-target-app-runner-delete-vpc-ingress-connection delete-vpc-ingress-connection",
+		Example: "  apprunner-pp-cli x-amz-target-app-runner-delete-vpc-ingress-connection delete-vpc-ingress-connection",
 		RunE: func(cmd *cobra.Command, args []string) error {
 			if !stdinBody {
 			}

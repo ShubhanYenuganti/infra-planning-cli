@@ -19,7 +19,7 @@ func newXAmzTargetAppRunnerCreateVpcConnectorCreateVpcConnectorCmd(flags *rootFl
 		Use:   "create-vpc-connector",
 		Aliases: []string{"create"},
 		Short: "Create an App Runner VPC connector resource. App Runner requires this resource when you want to associate your App...",
-		Example: "  aws-app-runner-pp-cli x-amz-target-app-runner-create-vpc-connector create-vpc-connector",
+		Example: "  apprunner-pp-cli x-amz-target-app-runner-create-vpc-connector create-vpc-connector",
 		RunE: func(cmd *cobra.Command, args []string) error {
 			if !stdinBody {
 			}

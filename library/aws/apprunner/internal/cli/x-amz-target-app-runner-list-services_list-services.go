@@ -21,7 +21,7 @@ func newXAmzTargetAppRunnerListServicesListServicesCmd(flags *rootFlags) *cobra.
 		Use:   "list-services",
 		Aliases: []string{"create"},
 		Short: "Returns a list of running App Runner services in your Amazon Web Services account.",
-		Example: "  aws-app-runner-pp-cli x-amz-target-app-runner-list-services list-services",
+		Example: "  apprunner-pp-cli x-amz-target-app-runner-list-services list-services",
 		RunE: func(cmd *cobra.Command, args []string) error {
 			if !stdinBody {
 			}

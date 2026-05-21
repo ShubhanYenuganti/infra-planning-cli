@@ -19,7 +19,7 @@ func newXAmzTargetAppRunnerDeleteAutoScalingConfigurationDeleteAutoScalingConfig
 		Use:   "delete-auto-scaling-configuration",
 		Aliases: []string{"create"},
 		Short: "Delete an App Runner automatic scaling configuration resource. You can delete a specific revision or the latest...",
-		Example: "  aws-app-runner-pp-cli x-amz-target-app-runner-delete-auto-scaling-configuration delete-auto-scaling-configuration",
+		Example: "  apprunner-pp-cli x-amz-target-app-runner-delete-auto-scaling-configuration delete-auto-scaling-configuration",
 		RunE: func(cmd *cobra.Command, args []string) error {
 			if !stdinBody {
 			}

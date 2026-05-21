@@ -21,7 +21,7 @@ func newXAmzTargetAppRunnerDescribeCustomDomainsDescribeCustomDomainsCmd(flags *
 		Use:   "describe-custom-domains",
 		Aliases: []string{"create"},
 		Short: "Return a description of custom domain names that are associated with an App Runner service.",
-		Example: "  aws-app-runner-pp-cli x-amz-target-app-runner-describe-custom-domains describe-custom-domains",
+		Example: "  apprunner-pp-cli x-amz-target-app-runner-describe-custom-domains describe-custom-domains",
 		RunE: func(cmd *cobra.Command, args []string) error {
 			if !stdinBody {
 			}

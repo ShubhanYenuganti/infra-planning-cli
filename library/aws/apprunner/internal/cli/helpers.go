@@ -140,17 +140,17 @@ func classifyAPIError(err error) error {
 	case strings.Contains(msg, "HTTP 400") && looksLikeAuthError(msg):
 		return authErr(fmt.Errorf("%w\nhint: the API rejected the request — this usually means auth is missing or invalid."+
 			"\n      Set your API key: export AWS_APP_RUNNER_HMAC=<your-key>"+
-			"\n      Run 'aws-app-runner-pp-cli doctor' to check auth status."+
+			"\n      Run 'apprunner-pp-cli doctor' to check auth status."+
 			"\n      Response: "+sanitizeErrorBody(msg), err))
 	case strings.Contains(msg, "HTTP 401"):
 		return authErr(fmt.Errorf("%w\nhint: check your API key."+
 			" Set it with: export AWS_APP_RUNNER_HMAC=<your-key>"+
-			"\n      Run 'aws-app-runner-pp-cli doctor' to check auth status.", err))
+			"\n      Run 'apprunner-pp-cli doctor' to check auth status.", err))
 	case strings.Contains(msg, "HTTP 403"):
 		return authErr(fmt.Errorf("%w\nhint: permission denied. Your credentials are valid but lack access to this resource."+
 			"\n      Check that your API key has the required permissions."+
 			"\n      Set it with: export AWS_APP_RUNNER_HMAC=<your-key>"+
-			"\n      Run 'aws-app-runner-pp-cli doctor' to check auth status.", err))
+			"\n      Run 'apprunner-pp-cli doctor' to check auth status.", err))
 	case strings.Contains(msg, "HTTP 404"):
 		return notFoundErr(fmt.Errorf("%w\nhint: resource not found. Run the 'list' command to see available items", err))
 	case strings.Contains(msg, "HTTP 429"):

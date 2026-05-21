@@ -19,7 +19,7 @@ func newXAmzTargetAppRunnerCreateObservabilityConfigurationCreateObservabilityCo
 		Use:   "create-observability-configuration",
 		Aliases: []string{"create"},
 		Short: "<p>Create an App Runner observability configuration resource. App Runner requires this resource when you create or...",
-		Example: "  aws-app-runner-pp-cli x-amz-target-app-runner-create-observability-configuration create-observability-configuration",
+		Example: "  apprunner-pp-cli x-amz-target-app-runner-create-observability-configuration create-observability-configuration",
 		RunE: func(cmd *cobra.Command, args []string) error {
 			if !stdinBody {
 			}

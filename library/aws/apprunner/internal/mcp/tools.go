@@ -15,8 +15,8 @@ import (
 
 	mcplib "github.com/mark3labs/mcp-go/mcp"
 	"github.com/mark3labs/mcp-go/server"
-	"aws-app-runner-pp-cli/internal/client"
-	"aws-app-runner-pp-cli/internal/config"
+	"apprunner-pp-cli/internal/client"
+	"apprunner-pp-cli/internal/config"
 )
 // looksLikeAuthError checks if an error message body contains auth-related keywords.
 func looksLikeAuthError(msg string) bool {
@@ -348,17 +348,17 @@ func makeAPIHandler(method, pathTemplate string, positionalParams []string) serv
 				return mcplib.NewToolResultError("authentication error: " + sanitizeErrorBody(msg) +
 					"\nhint: the API rejected the request — this usually means auth is missing or invalid." +
 					"\n      Set your API key: export AWS_APP_RUNNER_HMAC=<your-key>" +
-					"\n      Run 'aws-app-runner-pp-cli doctor' to check auth status."), nil
+					"\n      Run 'apprunner-pp-cli doctor' to check auth status."), nil
 			case strings.Contains(msg, "HTTP 401"):
 				return mcplib.NewToolResultError("authentication failed: " + sanitizeErrorBody(msg) +
 					"\nhint: check your API key." +
 					"\n      Set it with: export AWS_APP_RUNNER_HMAC=<your-key>" +
-					"\n      Run 'aws-app-runner-pp-cli doctor' to check auth status."), nil
+					"\n      Run 'apprunner-pp-cli doctor' to check auth status."), nil
 			case strings.Contains(msg, "HTTP 403"):
 				return mcplib.NewToolResultError("permission denied: " + sanitizeErrorBody(msg) +
 					"\nhint: your credentials are valid but lack access to this resource." +
 					"\n      Set it with: export AWS_APP_RUNNER_HMAC=<your-key>" +
-					"\n      Run 'aws-app-runner-pp-cli doctor' to check auth status."), nil
+					"\n      Run 'apprunner-pp-cli doctor' to check auth status."), nil
 			case strings.Contains(msg, "HTTP 404"):
 				if method == "DELETE" {
 					return mcplib.NewToolResultText("already deleted (no-op)"), nil
@@ -392,7 +392,7 @@ func makeAPIHandler(method, pathTemplate string, positionalParams []string) serv
 
 func newMCPClient() (*client.Client, error) {
 	home, _ := os.UserHomeDir()
-	cfgPath := filepath.Join(home, ".config", "aws-app-runner-pp-cli", "config.toml")
+	cfgPath := filepath.Join(home, ".config", "apprunner-pp-cli", "config.toml")
 	cfg, err := config.Load(cfgPath)
 	if err != nil {
 		return nil, fmt.Errorf("loading config: %w", err)

@@ -19,7 +19,7 @@ func newXAmzTargetAppRunnerDescribeObservabilityConfigurationDescribeObservabili
 		Use:   "describe-observability-configuration",
 		Aliases: []string{"create"},
 		Short: "Return a full description of an App Runner observability configuration resource.",
-		Example: "  aws-app-runner-pp-cli x-amz-target-app-runner-describe-observability-configuration describe-observability-configuration",
+		Example: "  apprunner-pp-cli x-amz-target-app-runner-describe-observability-configuration describe-observability-configuration",
 		RunE: func(cmd *cobra.Command, args []string) error {
 			if !stdinBody {
 			}

@@ -1,4 +1,4 @@
-module aws-app-runner-pp-cli
+module apprunner-pp-cli
 
 go 1.23
 

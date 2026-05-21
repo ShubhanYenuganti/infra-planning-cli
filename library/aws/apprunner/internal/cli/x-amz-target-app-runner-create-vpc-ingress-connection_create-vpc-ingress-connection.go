@@ -19,7 +19,7 @@ func newXAmzTargetAppRunnerCreateVpcIngressConnectionCreateVpcIngressConnectionC
 		Use:   "create-vpc-ingress-connection",
 		Aliases: []string{"create"},
 		Short: "Create an App Runner VPC Ingress Connection resource. App Runner requires this resource when you want to associate...",
-		Example: "  aws-app-runner-pp-cli x-amz-target-app-runner-create-vpc-ingress-connection create-vpc-ingress-connection",
+		Example: "  apprunner-pp-cli x-amz-target-app-runner-create-vpc-ingress-connection create-vpc-ingress-connection",
 		RunE: func(cmd *cobra.Command, args []string) error {
 			if !stdinBody {
 			}

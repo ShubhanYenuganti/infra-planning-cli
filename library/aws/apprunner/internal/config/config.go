@@ -38,7 +38,7 @@ func Load(configPath string) (*Config, error) {
 	}
 	if path == "" {
 		home, _ := os.UserHomeDir()
-		path = filepath.Join(home, ".config", "aws-app-runner-pp-cli", "config.toml")
+		path = filepath.Join(home, ".config", "apprunner-pp-cli", "config.toml")
 	}
 	cfg.Path = path
 

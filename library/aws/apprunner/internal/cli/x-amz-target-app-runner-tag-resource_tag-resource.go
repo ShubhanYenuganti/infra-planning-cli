@@ -19,7 +19,7 @@ func newXAmzTargetAppRunnerTagResourceTagResourceCmd(flags *rootFlags) *cobra.Co
 		Use:   "tag-resource",
 		Aliases: []string{"create"},
 		Short: "Add tags to, or update the tag values of, an App Runner resource. A tag is a key-value pair.",
-		Example: "  aws-app-runner-pp-cli x-amz-target-app-runner-tag-resource tag-resource",
+		Example: "  apprunner-pp-cli x-amz-target-app-runner-tag-resource tag-resource",
 		RunE: func(cmd *cobra.Command, args []string) error {
 			if !stdinBody {
 			}

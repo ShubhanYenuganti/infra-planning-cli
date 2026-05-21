@@ -19,7 +19,7 @@ func newXAmzTargetAppRunnerStartDeploymentStartDeploymentCmd(flags *rootFlags) *
 		Use:   "start-deployment",
 		Aliases: []string{"create"},
 		Short: "<p>Initiate a manual deployment of the latest commit in a source code repository or the latest image in a source...",
-		Example: "  aws-app-runner-pp-cli x-amz-target-app-runner-start-deployment start-deployment",
+		Example: "  apprunner-pp-cli x-amz-target-app-runner-start-deployment start-deployment",
 		RunE: func(cmd *cobra.Command, args []string) error {
 			if !stdinBody {
 			}

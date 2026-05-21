@@ -19,7 +19,7 @@ func newXAmzTargetAppRunnerAssociateCustomDomainAssociateCustomDomainCmd(flags *
 		Use:   "associate-custom-domain",
 		Aliases: []string{"create"},
 		Short: "<p>Associate your own domain name with the App Runner subdomain URL of your App Runner service.</p> <p>After you...",
-		Example: "  aws-app-runner-pp-cli x-amz-target-app-runner-associate-custom-domain associate-custom-domain",
+		Example: "  apprunner-pp-cli x-amz-target-app-runner-associate-custom-domain associate-custom-domain",
 		RunE: func(cmd *cobra.Command, args []string) error {
 			if !stdinBody {
 			}

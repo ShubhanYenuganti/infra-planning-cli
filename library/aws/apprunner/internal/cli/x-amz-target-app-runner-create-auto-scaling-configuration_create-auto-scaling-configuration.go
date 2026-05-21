@@ -19,7 +19,7 @@ func newXAmzTargetAppRunnerCreateAutoScalingConfigurationCreateAutoScalingConfig
 		Use:   "create-auto-scaling-configuration",
 		Aliases: []string{"create"},
 		Short: "<p>Create an App Runner automatic scaling configuration resource. App Runner requires this resource when you create...",
-		Example: "  aws-app-runner-pp-cli x-amz-target-app-runner-create-auto-scaling-configuration create-auto-scaling-configuration",
+		Example: "  apprunner-pp-cli x-amz-target-app-runner-create-auto-scaling-configuration create-auto-scaling-configuration",
 		RunE: func(cmd *cobra.Command, args []string) error {
 			if !stdinBody {
 			}

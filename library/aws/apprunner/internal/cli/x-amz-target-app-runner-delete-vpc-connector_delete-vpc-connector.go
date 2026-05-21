@@ -19,7 +19,7 @@ func newXAmzTargetAppRunnerDeleteVpcConnectorDeleteVpcConnectorCmd(flags *rootFl
 		Use:   "delete-vpc-connector",
 		Aliases: []string{"create"},
 		Short: "Delete an App Runner VPC connector resource. You can't delete a connector that's used by one or more App Runner...",
-		Example: "  aws-app-runner-pp-cli x-amz-target-app-runner-delete-vpc-connector delete-vpc-connector",
+		Example: "  apprunner-pp-cli x-amz-target-app-runner-delete-vpc-connector delete-vpc-connector",
 		RunE: func(cmd *cobra.Command, args []string) error {
 			if !stdinBody {
 			}

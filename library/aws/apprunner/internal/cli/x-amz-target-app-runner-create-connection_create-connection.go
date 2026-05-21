@@ -19,7 +19,7 @@ func newXAmzTargetAppRunnerCreateConnectionCreateConnectionCmd(flags *rootFlags)
 		Use:   "create-connection",
 		Aliases: []string{"create"},
 		Short: "<p>Create an App Runner connection resource. App Runner requires a connection resource when you create App Runner...",
-		Example: "  aws-app-runner-pp-cli x-amz-target-app-runner-create-connection create-connection",
+		Example: "  apprunner-pp-cli x-amz-target-app-runner-create-connection create-connection",
 		RunE: func(cmd *cobra.Command, args []string) error {
 			if !stdinBody {
 			}

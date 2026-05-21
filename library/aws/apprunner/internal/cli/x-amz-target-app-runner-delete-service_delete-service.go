@@ -19,7 +19,7 @@ func newXAmzTargetAppRunnerDeleteServiceDeleteServiceCmd(flags *rootFlags) *cobr
 		Use:   "delete-service",
 		Aliases: []string{"create"},
 		Short: "<p>Delete an App Runner service.</p> <p>This is an asynchronous operation. On a successful call, you can use the...",
-		Example: "  aws-app-runner-pp-cli x-amz-target-app-runner-delete-service delete-service",
+		Example: "  apprunner-pp-cli x-amz-target-app-runner-delete-service delete-service",
 		RunE: func(cmd *cobra.Command, args []string) error {
 			if !stdinBody {
 			}

@@ -19,7 +19,7 @@ func newXAmzTargetAppRunnerCreateServiceCreateServiceCmd(flags *rootFlags) *cobr
 		Use:   "create-service",
 		Aliases: []string{"create"},
 		Short: "<p>Create an App Runner service. After the service is created, the action also automatically starts a...",
-		Example: "  aws-app-runner-pp-cli x-amz-target-app-runner-create-service create-service",
+		Example: "  apprunner-pp-cli x-amz-target-app-runner-create-service create-service",
 		RunE: func(cmd *cobra.Command, args []string) error {
 			if !stdinBody {
 			}

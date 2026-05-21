@@ -21,7 +21,7 @@ func newXAmzTargetAppRunnerListObservabilityConfigurationsListObservabilityConfi
 		Use:   "list-observability-configurations",
 		Aliases: []string{"create"},
 		Short: "<p>Returns a list of active App Runner observability configurations in your Amazon Web Services account. You can...",
-		Example: "  aws-app-runner-pp-cli x-amz-target-app-runner-list-observability-configurations list-observability-configurations",
+		Example: "  apprunner-pp-cli x-amz-target-app-runner-list-observability-configurations list-observability-configurations",
 		RunE: func(cmd *cobra.Command, args []string) error {
 			if !stdinBody {
 			}

@@ -19,7 +19,7 @@ func newXAmzTargetAppRunnerDeleteConnectionDeleteConnectionCmd(flags *rootFlags)
 		Use:   "delete-connection",
 		Aliases: []string{"create"},
 		Short: "Delete an App Runner connection. You must first ensure that there are no running App Runner services that use this...",
-		Example: "  aws-app-runner-pp-cli x-amz-target-app-runner-delete-connection delete-connection",
+		Example: "  apprunner-pp-cli x-amz-target-app-runner-delete-connection delete-connection",
 		RunE: func(cmd *cobra.Command, args []string) error {
 			if !stdinBody {
 			}

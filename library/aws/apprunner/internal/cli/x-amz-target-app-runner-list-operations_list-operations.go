@@ -21,7 +21,7 @@ func newXAmzTargetAppRunnerListOperationsListOperationsCmd(flags *rootFlags) *co
 		Use:   "list-operations",
 		Aliases: []string{"create"},
 		Short: "<p>Return a list of operations that occurred on an App Runner service.</p> <p>The resulting list of...",
-		Example: "  aws-app-runner-pp-cli x-amz-target-app-runner-list-operations list-operations",
+		Example: "  apprunner-pp-cli x-amz-target-app-runner-list-operations list-operations",
 		RunE: func(cmd *cobra.Command, args []string) error {
 			if !stdinBody {
 			}

@@ -19,7 +19,7 @@ func newXAmzTargetAppRunnerPauseServicePauseServiceCmd(flags *rootFlags) *cobra.
 		Use:   "pause-service",
 		Aliases: []string{"create"},
 		Short: "<p>Pause an active App Runner service. App Runner reduces compute capacity for the service to zero and loses state...",
-		Example: "  aws-app-runner-pp-cli x-amz-target-app-runner-pause-service pause-service",
+		Example: "  apprunner-pp-cli x-amz-target-app-runner-pause-service pause-service",
 		RunE: func(cmd *cobra.Command, args []string) error {
 			if !stdinBody {
 			}

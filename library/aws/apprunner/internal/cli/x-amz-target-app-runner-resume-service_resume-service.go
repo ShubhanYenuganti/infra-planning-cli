@@ -19,7 +19,7 @@ func newXAmzTargetAppRunnerResumeServiceResumeServiceCmd(flags *rootFlags) *cobr
 		Use:   "resume-service",
 		Aliases: []string{"create"},
 		Short: "<p>Resume an active App Runner service. App Runner provisions compute capacity for the service.</p> <p>This is an...",
-		Example: "  aws-app-runner-pp-cli x-amz-target-app-runner-resume-service resume-service",
+		Example: "  apprunner-pp-cli x-amz-target-app-runner-resume-service resume-service",
 		RunE: func(cmd *cobra.Command, args []string) error {
 			if !stdinBody {
 			}

@@ -21,7 +21,7 @@ func newXAmzTargetAppRunnerListVpcConnectorsListVpcConnectorsCmd(flags *rootFlag
 		Use:   "list-vpc-connectors",
 		Aliases: []string{"create"},
 		Short: "Returns a list of App Runner VPC connectors in your Amazon Web Services account.",
-		Example: "  aws-app-runner-pp-cli x-amz-target-app-runner-list-vpc-connectors list-vpc-connectors",
+		Example: "  apprunner-pp-cli x-amz-target-app-runner-list-vpc-connectors list-vpc-connectors",
 		RunE: func(cmd *cobra.Command, args []string) error {
 			if !stdinBody {
 			}

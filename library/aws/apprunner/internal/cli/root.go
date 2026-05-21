@@ -10,8 +10,8 @@ import (
 	"text/tabwriter"
 	"time"
 
-	"aws-app-runner-pp-cli/internal/client"
-	"aws-app-runner-pp-cli/internal/config"
+	"apprunner-pp-cli/internal/client"
+	"apprunner-pp-cli/internal/config"
 	"github.com/spf13/cobra"
 )
 
@@ -40,7 +40,7 @@ func Execute() error {
 	var flags rootFlags
 
 	rootCmd := &cobra.Command{
-		Use:           "aws-app-runner-pp-cli",
+		Use:           "apprunner-pp-cli",
 		Short:         "Manage aws-app-runner resources via the aws-app-runner API",
 		SilenceUsage: true,
 		Version:      version,

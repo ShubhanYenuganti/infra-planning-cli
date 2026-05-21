@@ -19,7 +19,7 @@ func newXAmzTargetAppRunnerUpdateVpcIngressConnectionUpdateVpcIngressConnectionC
 		Use:   "update-vpc-ingress-connection",
 		Aliases: []string{"create"},
 		Short: "<p>Update an existing App Runner VPC Ingress Connection resource. The VPC Ingress Connection must be in one of the...",
-		Example: "  aws-app-runner-pp-cli x-amz-target-app-runner-update-vpc-ingress-connection update-vpc-ingress-connection",
+		Example: "  apprunner-pp-cli x-amz-target-app-runner-update-vpc-ingress-connection update-vpc-ingress-connection",
 		RunE: func(cmd *cobra.Command, args []string) error {
 			if !stdinBody {
 			}

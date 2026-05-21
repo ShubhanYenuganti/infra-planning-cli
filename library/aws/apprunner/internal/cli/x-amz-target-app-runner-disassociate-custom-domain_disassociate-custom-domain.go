@@ -19,7 +19,7 @@ func newXAmzTargetAppRunnerDisassociateCustomDomainDisassociateCustomDomainCmd(f
 		Use:   "disassociate-custom-domain",
 		Aliases: []string{"create"},
 		Short: "<p>Disassociate a custom domain name from an App Runner service.</p> <p>Certificates tracking domain validity are...",
-		Example: "  aws-app-runner-pp-cli x-amz-target-app-runner-disassociate-custom-domain disassociate-custom-domain",
+		Example: "  apprunner-pp-cli x-amz-target-app-runner-disassociate-custom-domain disassociate-custom-domain",
 		RunE: func(cmd *cobra.Command, args []string) error {
 			if !stdinBody {
 			}

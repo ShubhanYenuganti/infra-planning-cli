@@ -19,7 +19,7 @@ func newXAmzTargetAppRunnerDeleteObservabilityConfigurationDeleteObservabilityCo
 		Use:   "delete-observability-configuration",
 		Aliases: []string{"create"},
 		Short: "Delete an App Runner observability configuration resource. You can delete a specific revision or the latest active...",
-		Example: "  aws-app-runner-pp-cli x-amz-target-app-runner-delete-observability-configuration delete-observability-configuration",
+		Example: "  apprunner-pp-cli x-amz-target-app-runner-delete-observability-configuration delete-observability-configuration",
 		RunE: func(cmd *cobra.Command, args []string) error {
 			if !stdinBody {
 			}

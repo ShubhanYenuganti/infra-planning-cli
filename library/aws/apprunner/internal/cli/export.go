@@ -25,13 +25,13 @@ func newExportCmd(flags *rootFlags) *cobra.Command {
 per line, streaming-friendly) and JSON (array). JSONL is recommended for
 large datasets as it has no memory pressure.`,
 		Example: `  # Export all items as JSONL (streaming, recommended for large datasets)
-  aws-app-runner-pp-cli export <resource> --format jsonl --output data.jsonl
+  apprunner-pp-cli export <resource> --format jsonl --output data.jsonl
 
   # Export with limit
-  aws-app-runner-pp-cli export <resource> --format jsonl --limit 1000
+  apprunner-pp-cli export <resource> --format jsonl --limit 1000
 
   # Pipe to another tool
-  aws-app-runner-pp-cli export <resource> --format jsonl | jq '.id'`,
+  apprunner-pp-cli export <resource> --format jsonl | jq '.id'`,
 		Args: cobra.MinimumNArgs(1),
 		RunE: func(cmd *cobra.Command, args []string) error {
 			c, err := flags.newClient()

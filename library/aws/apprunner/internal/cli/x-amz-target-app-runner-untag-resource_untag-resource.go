@@ -19,7 +19,7 @@ func newXAmzTargetAppRunnerUntagResourceUntagResourceCmd(flags *rootFlags) *cobr
 		Use:   "untag-resource",
 		Aliases: []string{"create"},
 		Short: "Remove tags from an App Runner resource.",
-		Example: "  aws-app-runner-pp-cli x-amz-target-app-runner-untag-resource untag-resource",
+		Example: "  apprunner-pp-cli x-amz-target-app-runner-untag-resource untag-resource",
 		RunE: func(cmd *cobra.Command, args []string) error {
 			if !stdinBody {
 			}

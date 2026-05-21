@@ -20,7 +20,7 @@ import (
 	"sync"
 	"time"
 
-	"aws-app-runner-pp-cli/internal/config"
+	"apprunner-pp-cli/internal/config"
 )
 
 type Client struct {
@@ -134,7 +134,7 @@ func (e *APIError) Error() string {
 
 func New(cfg *config.Config, timeout time.Duration, rateLimit float64) *Client {
 	homeDir, _ := os.UserHomeDir()
-	cacheDir := filepath.Join(homeDir, ".cache", "aws-app-runner-pp-cli")
+	cacheDir := filepath.Join(homeDir, ".cache", "apprunner-pp-cli")
 	return &Client{
 		BaseURL:    strings.TrimRight(cfg.BaseURL, "/"),
 		Config:     cfg,
@@ -287,7 +287,7 @@ func (c *Client) do(method, path string, params map[string]string, body any, hea
 		for k, v := range headerOverrides {
 			req.Header.Set(k, v)
 		}
-		req.Header.Set("User-Agent", "aws-app-runner-pp-cli/2020-05-15")
+		req.Header.Set("User-Agent", "apprunner-pp-cli/2020-05-15")
 
 		resp, err := c.HTTPClient.Do(req)
 		if err != nil {

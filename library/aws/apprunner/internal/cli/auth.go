@@ -7,7 +7,7 @@ import (
 	"fmt"
 	"os"
 
-	"aws-app-runner-pp-cli/internal/config"
+	"apprunner-pp-cli/internal/config"
 	"github.com/spf13/cobra"
 )
 
@@ -28,7 +28,7 @@ func newAuthStatusCmd(flags *rootFlags) *cobra.Command {
 	return &cobra.Command{
 		Use:   "status",
 		Short: "Show authentication status",
-		Example: "  aws-app-runner-pp-cli auth status",
+		Example: "  apprunner-pp-cli auth status",
 		RunE: func(cmd *cobra.Command, args []string) error {
 			cfg, err := config.Load(flags.configPath)
 			if err != nil {
@@ -42,7 +42,7 @@ func newAuthStatusCmd(flags *rootFlags) *cobra.Command {
 				fmt.Fprintln(w, "")
 				fmt.Fprintln(w, "Set your token:")
 				fmt.Fprintln(w, "  export AWS_APP_RUNNER_HMAC=\"your-token-here\"")
-				fmt.Fprintf(w, "  aws-app-runner-pp-cli auth set-token <token>\n")
+				fmt.Fprintf(w, "  apprunner-pp-cli auth set-token <token>\n")
 				return authErr(fmt.Errorf("no credentials configured"))
 			}
 
@@ -58,7 +58,7 @@ func newAuthSetTokenCmd(flags *rootFlags) *cobra.Command {
 	return &cobra.Command{
 		Use:   "set-token <token>",
 		Short: "Save an API token to the config file",
-		Example: "  aws-app-runner-pp-cli auth set-token sk_live_abc123",
+		Example: "  apprunner-pp-cli auth set-token sk_live_abc123",
 		Args:  cobra.ExactArgs(1),
 		RunE: func(cmd *cobra.Command, args []string) error {
 			cfg, err := config.Load(flags.configPath)
@@ -81,7 +81,7 @@ func newAuthLogoutCmd(flags *rootFlags) *cobra.Command {
 	return &cobra.Command{
 		Use:   "logout",
 		Short: "Clear stored credentials",
-		Example: "  aws-app-runner-pp-cli auth logout",
+		Example: "  apprunner-pp-cli auth logout",
 		RunE: func(cmd *cobra.Command, args []string) error {
 			cfg, err := config.Load(flags.configPath)
 			if err != nil {

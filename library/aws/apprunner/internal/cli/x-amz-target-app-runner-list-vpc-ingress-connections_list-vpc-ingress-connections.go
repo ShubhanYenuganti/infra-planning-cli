@@ -21,7 +21,7 @@ func newXAmzTargetAppRunnerListVpcIngressConnectionsListVpcIngressConnectionsCmd
 		Use:   "list-vpc-ingress-connections",
 		Aliases: []string{"create"},
 		Short: "Return a list of App Runner VPC Ingress Connections in your Amazon Web Services account.",
-		Example: "  aws-app-runner-pp-cli x-amz-target-app-runner-list-vpc-ingress-connections list-vpc-ingress-connections",
+		Example: "  apprunner-pp-cli x-amz-target-app-runner-list-vpc-ingress-connections list-vpc-ingress-connections",
 		RunE: func(cmd *cobra.Command, args []string) error {
 			if !stdinBody {
 			}

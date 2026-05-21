@@ -10,7 +10,7 @@ import (
 	"strings"
 	"time"
 
-	"aws-app-runner-pp-cli/internal/config"
+	"apprunner-pp-cli/internal/config"
 	"github.com/spf13/cobra"
 )
 
@@ -99,7 +99,7 @@ func newDoctorCmd(flags *rootFlags) *cobra.Command {
 					authReq, _ := http.NewRequest("GET", baseURL, nil)
 					authReq.Header.Set("Authorization", authHeader)
 					authReq.Header.Set("X-Amz-Target", "AppRunner.DescribeVpcIngressConnection")
-					authReq.Header.Set("User-Agent", "aws-app-runner-pp-cli")
+					authReq.Header.Set("User-Agent", "apprunner-pp-cli")
 					authResp, authErr := httpClient.Do(authReq)
 					if authErr != nil {
 						report["credentials"] = "error: could not reach API"

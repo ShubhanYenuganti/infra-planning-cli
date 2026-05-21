@@ -21,7 +21,7 @@ func newXAmzTargetAppRunnerListConnectionsListConnectionsCmd(flags *rootFlags) *
 		Use:   "list-connections",
 		Aliases: []string{"create"},
 		Short: "Returns a list of App Runner connections that are associated with your Amazon Web Services account.",
-		Example: "  aws-app-runner-pp-cli x-amz-target-app-runner-list-connections list-connections",
+		Example: "  apprunner-pp-cli x-amz-target-app-runner-list-connections list-connections",
 		RunE: func(cmd *cobra.Command, args []string) error {
 			if !stdinBody {
 			}

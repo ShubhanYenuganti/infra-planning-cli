@@ -19,7 +19,7 @@ func newXAmzTargetAppRunnerListTagsForResourceListTagsForResourceCmd(flags *root
 		Use:   "list-tags-for-resource",
 		Aliases: []string{"create"},
 		Short: "List tags that are associated with for an App Runner resource. The response contains a list of tag key-value pairs.",
-		Example: "  aws-app-runner-pp-cli x-amz-target-app-runner-list-tags-for-resource list-tags-for-resource",
+		Example: "  apprunner-pp-cli x-amz-target-app-runner-list-tags-for-resource list-tags-for-resource",
 		RunE: func(cmd *cobra.Command, args []string) error {
 			if !stdinBody {
 			}

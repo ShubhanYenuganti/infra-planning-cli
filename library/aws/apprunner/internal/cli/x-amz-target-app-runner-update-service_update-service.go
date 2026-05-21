@@ -19,7 +19,7 @@ func newXAmzTargetAppRunnerUpdateServiceUpdateServiceCmd(flags *rootFlags) *cobr
 		Use:   "update-service",
 		Aliases: []string{"create"},
 		Short: "<p>Update an App Runner service. You can update the source configuration and instance configuration of the service....",
-		Example: "  aws-app-runner-pp-cli x-amz-target-app-runner-update-service update-service",
+		Example: "  apprunner-pp-cli x-amz-target-app-runner-update-service update-service",
 		RunE: func(cmd *cobra.Command, args []string) error {
 			if !stdinBody {
 			}
