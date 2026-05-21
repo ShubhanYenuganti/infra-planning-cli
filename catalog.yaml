@@ -38,7 +38,7 @@ clis:
     path: library/aws/lambda
     binary: lambda-pp-cli
     install: github.com/ShubhanYenuganti/infra-press/library/aws/lambda/cmd/lambda-pp-cli
-    status: bootstrapping
+    status: preview
     press_version: v1.3.2
     spec_version: "2015-03-31"
     spec_url: https://api.apis.guru/v2/specs/amazonaws.com/lambda/2015-03-31/openapi.json
