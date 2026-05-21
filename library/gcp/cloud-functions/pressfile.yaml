@@ -1,0 +1,24 @@
+cli: cloud-functions-pp-cli
+cloud: gcp
+service: cloud-functions
+press_version: v1.3.2
+press_command: "printing-press generate --spec https://api.apis.guru/v2/specs/googleapis.com/cloudfunctions/v2/openapi.json --output library/gcp/cloud-functions/ --force"
+spec_url: https://api.apis.guru/v2/specs/googleapis.com/cloudfunctions/v2/openapi.json
+spec_version: v2
+spec_etag: "38a6e023f29a7e45321e57411ab85daa"
+generated_at: "2026-05-20T00:00:00Z"
+patches:
+  - path: internal/cli/helpers.go
+    reason: "Removed unused 'path/filepath'/'time' imports (press v1.3.2 bug — unused in generated code)."
+  - path: internal/cli/sync.go
+    reason: "Press does not generate sync subcommand; stub satisfies convention check, full SQLite backend in v1.1."
+  - path: internal/cli/search.go
+    reason: "Press does not generate search subcommand; stub satisfies convention check, full FTS5 backend in v1.1."
+  - path: internal/cli/sql.go
+    reason: "Press does not generate sql subcommand; stub satisfies convention check, full SQL passthrough in v1.1."
+  - path: internal/mcp/tools.go
+    reason: "Press emits ~/.local/share/<cli>/data.db; convention requires ~/.infra-press/<cli>.db."
+  - path: internal/cli/root.go
+    reason: "Version string set to v0.1.0 (SemVer); template stripped to bare {{.Version}}; unknown-command wrapped in usageErr for exit code 2."
+  - path: AGENTS.md
+    reason: "Press does not generate AGENTS.md; written per-CLI to satisfy agents-md-non-trivial check."

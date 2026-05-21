@@ -16,6 +16,21 @@ clis:
     known_gaps:
       - "7 GCP hierarchical paths skipped by press (parent-based routes)"
       - "sync/search/sql return not-yet-implemented (full backend in v1.1)"
+  - name: cloud-functions-pp-cli
+    cloud: gcp
+    service: cloud-functions
+    paradigm: serverless
+    path: library/gcp/cloud-functions
+    binary: cloud-functions-pp-cli
+    install: github.com/ShubhanYenuganti/infra-press/library/gcp/cloud-functions/cmd/cloud-functions-pp-cli
+    status: bootstrapping
+    press_version: v1.3.2
+    spec_version: v2
+    spec_url: https://api.apis.guru/v2/specs/googleapis.com/cloudfunctions/v2/openapi.json
+    daily_commands: [api, doctor]
+    compound_commands: []
+    known_gaps:
+      - "sync/search/sql return not-yet-implemented (full backend in v1.1)"
 # As sprints ship CLIs, entries appear here per the schema:
 #
 # - name: lambda-pp-cli
