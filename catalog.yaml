@@ -11,6 +11,9 @@ clis:
     press_version: v1.3.2
     spec_version: v2
     spec_url: https://api.apis.guru/v2/specs/googleapis.com/run/v2/openapi.json
+    live_smoke:
+      list_subcommand: ""
+      args: []
     daily_commands: [api, resource-get-iam-policy, doctor]
     compound_commands: []
     known_gaps:
@@ -27,6 +30,9 @@ clis:
     press_version: v1.3.2
     spec_version: v2
     spec_url: https://api.apis.guru/v2/specs/googleapis.com/cloudfunctions/v2/openapi.json
+    live_smoke:
+      list_subcommand: ""
+      args: []
     daily_commands: [api, doctor]
     compound_commands: []
     known_gaps:
@@ -42,6 +48,9 @@ clis:
     press_version: v1.3.2
     spec_version: "2015-03-31"
     spec_url: https://api.apis.guru/v2/specs/amazonaws.com/lambda/2015-03-31/openapi.json
+    live_smoke:
+      list_subcommand: ""
+      args: []
     daily_commands: [api, doctor, export]
     compound_commands: []
     known_gaps:
@@ -57,6 +66,9 @@ clis:
     press_version: v1.3.2
     spec_version: "2020-05-15"
     spec_url: https://api.apis.guru/v2/specs/amazonaws.com/apprunner/2020-05-15/openapi.json
+    live_smoke:
+      list_subcommand: ""
+      args: []
     daily_commands: [api, doctor, export]
     compound_commands: []
     known_gaps:
@@ -73,6 +85,9 @@ clis:
     spec_version: "2018-11-01"
     spec_url: https://api.apis.guru/v2/specs/azure.com/web-WebApps/2018-11-01/swagger.json
     spec_pipeline: [swagger2openapi]
+    live_smoke:
+      list_subcommand: ""
+      args: []
     daily_commands: [api, doctor]
     compound_commands: []
     known_gaps:
@@ -90,6 +105,9 @@ clis:
     spec_version: "2024-03-01"
     spec_url: https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/specification/app/resource-manager/Microsoft.App/ContainerApps/stable/2024-03-01/ContainerApps.json
     spec_pipeline: [swagger2openapi]
+    live_smoke:
+      list_subcommand: ""
+      args: []
     daily_commands: [api, doctor]
     compound_commands: []
     known_gaps:

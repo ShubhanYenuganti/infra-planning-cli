@@ -3,7 +3,7 @@
 
 .PHONY: verify verify-fast verify-lint verify-build verify-golden verify-smoke verify-recipe verify-spec-sync verify-upstream verify-live
 
-verify: verify-fast verify-upstream
+verify: verify-fast verify-upstream verify-live
 
 verify-fast: verify-lint verify-build verify-golden verify-smoke verify-recipe verify-spec-sync
 	@echo "==> verify-fast complete (L1-L6)"
@@ -38,3 +38,7 @@ verify-spec-sync:
 verify-upstream:
 	@echo "==> L7 upstream advisory (advisory only, never fails PR)"
 	cd tests/spec_check && go test -v -run TestUpstreamAdvisory .
+
+verify-live:
+	@echo "==> L8 live cloud (skips clouds without OIDC creds)"
+	cd tests/live && go test -tags=live -v .
