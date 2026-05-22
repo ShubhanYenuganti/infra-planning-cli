@@ -10,6 +10,7 @@ verify-fast: verify-lint verify-build verify-golden verify-smoke verify-recipe v
 
 verify-lint:
 	@echo "==> L1 lint"
+	@command -v yq >/dev/null 2>&1 || { echo "ERROR: yq is required for verify-lint (brew install yq | snap install yq)"; exit 1; }
 	@for path in $$(yq '.clis[].path' catalog.yaml); do \
 		echo "  - $$path"; \
 		(cd tools/lint-conventions && go run . "../../$$path/") || exit 1; \
