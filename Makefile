@@ -3,7 +3,7 @@
 
 .PHONY: verify verify-fast verify-lint verify-build verify-golden verify-smoke verify-recipe verify-spec-sync verify-upstream verify-live
 
-verify: verify-fast
+verify: verify-fast verify-upstream
 
 verify-fast: verify-lint verify-build verify-golden verify-smoke verify-recipe verify-spec-sync
 	@echo "==> verify-fast complete (L1-L6)"
@@ -34,3 +34,7 @@ verify-recipe:
 verify-spec-sync:
 	@echo "==> L6 spec sync"
 	cd tests/spec_check && go test -v -run TestSpecSync .
+
+verify-upstream:
+	@echo "==> L7 upstream advisory (advisory only, never fails PR)"
+	cd tests/spec_check && go test -v -run TestUpstreamAdvisory .

@@ -23,11 +23,11 @@ jobs:
       - name: Install yq
         run: sudo snap install yq
 
-      - name: Run make verify-fast
+      - name: Run make verify (L1-L7)
         id: verify
         run: |
           set -o pipefail
-          make verify-fast 2>&1 | tee verify.log
+          make verify 2>&1 | tee verify.log
 
       - name: Append verify.log to job summary
         if: always()
