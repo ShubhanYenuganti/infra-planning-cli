@@ -2,5 +2,7 @@
 /infra-plan
 # compiled CLI binaries (rebuilt by golden tests and goreleaser)
 library/**/cmd/*/*
-# local Claude Code config
-.claude/
+# local Claude Code config — ignore everything except project-shared slash commands
+.claude/*
+!.claude/commands/
+.claude/commands/.DS_Store
