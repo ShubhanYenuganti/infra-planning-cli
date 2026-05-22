@@ -1,0 +1,41 @@
+name: verify
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+  pull-requests: write
+  id-token: write   # required for OIDC in Phase 5; harmless here.
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-go@v5
+        with:
+          go-version: '1.26'
+
+      - name: Install yq
+        run: sudo snap install yq
+
+      - name: Run make verify-fast
+        id: verify
+        run: |
+          set -o pipefail
+          make verify-fast 2>&1 | tee verify.log
+
+      - name: Append verify.log to job summary
+        if: always()
+        run: |
+          {
+            echo "## Verification report"
+            echo
+            echo '```'
+            tail -200 verify.log
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
