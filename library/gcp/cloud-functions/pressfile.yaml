@@ -5,7 +5,8 @@ press_version: v1.3.2
 press_command: "printing-press generate --spec https://api.apis.guru/v2/specs/googleapis.com/cloudfunctions/v2/openapi.json --output library/gcp/cloud-functions/ --force"
 spec_url: https://api.apis.guru/v2/specs/googleapis.com/cloudfunctions/v2/openapi.json
 spec_version: v2
-spec_etag: "38a6e023f29a7e45321e57411ab85daa"
+spec_sha256: 4240ccaf4df4dd4aeb859617e1aad49ec611fa99747b05e1f1213374b4a3dfac
+vendored_spec: tests/fixtures/specs/cloud-functions-pp-cli.spec.json
 generated_at: "2026-05-20T00:00:00Z"
 patches:
   - path: internal/cli/helpers.go

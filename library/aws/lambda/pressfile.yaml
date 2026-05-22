@@ -5,7 +5,8 @@ press_version: v1.3.2
 press_command: "printing-press generate --spec https://api.apis.guru/v2/specs/amazonaws.com/lambda/2015-03-31/openapi.json --output library/aws/lambda/ --force"
 spec_url: https://api.apis.guru/v2/specs/amazonaws.com/lambda/2015-03-31/openapi.json
 spec_version: "2015-03-31"
-spec_etag: "b6686308e672bb68d0879410af81b1c3"
+spec_sha256: 6e8e7818b3f7bdfa712837492fdc4901c1a6279fa47b529d18f3e0989e493b1a
+vendored_spec: tests/fixtures/specs/lambda-pp-cli.spec.json
 generated_at: "2026-05-20T00:00:00Z"
 patches:
   - path: internal/cli/search.go

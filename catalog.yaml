@@ -11,6 +11,11 @@ clis:
     press_version: v1.3.2
     spec_version: v2
     spec_url: https://api.apis.guru/v2/specs/googleapis.com/run/v2/openapi.json
+    live_smoke:
+      # GCP list endpoints require a {project} path segment; L8 has no
+      # project-scope plumbing, so list-endpoint assertion is deferred.
+      list_subcommand: ""
+      args: []
     daily_commands: [api, resource-get-iam-policy, doctor]
     compound_commands: []
     known_gaps:
@@ -27,6 +32,11 @@ clis:
     press_version: v1.3.2
     spec_version: v2
     spec_url: https://api.apis.guru/v2/specs/googleapis.com/cloudfunctions/v2/openapi.json
+    live_smoke:
+      # GCP list endpoints require a {project} path segment; L8 has no
+      # project-scope plumbing, so list-endpoint assertion is deferred.
+      list_subcommand: ""
+      args: []
     daily_commands: [api, doctor]
     compound_commands: []
     known_gaps:
@@ -42,6 +52,10 @@ clis:
     press_version: v1.3.2
     spec_version: "2015-03-31"
     spec_url: https://api.apis.guru/v2/specs/amazonaws.com/lambda/2015-03-31/openapi.json
+    live_smoke:
+      # Shortcut for '2018-10-31 list-layers' — global list, no positionals.
+      list_subcommand: "2018-10-31"
+      args: []
     daily_commands: [api, doctor, export]
     compound_commands: []
     known_gaps:
@@ -57,6 +71,10 @@ clis:
     press_version: v1.3.2
     spec_version: "2020-05-15"
     spec_url: https://api.apis.guru/v2/specs/amazonaws.com/apprunner/2020-05-15/openapi.json
+    live_smoke:
+      # AWS App Runner ListServices — account-wide, no positionals required.
+      list_subcommand: "x-amz-target-app-runner-list-services"
+      args: ["list-services"]
     daily_commands: [api, doctor, export]
     compound_commands: []
     known_gaps:
@@ -73,6 +91,11 @@ clis:
     spec_version: "2018-11-01"
     spec_url: https://api.apis.guru/v2/specs/azure.com/web-WebApps/2018-11-01/swagger.json
     spec_pipeline: [swagger2openapi]
+    live_smoke:
+      # Azure Web Apps list endpoints require <resourceGroup> <name> <subscriptionId>
+      # positionals; L8 has no resource-scope plumbing, so deferred.
+      list_subcommand: ""
+      args: []
     daily_commands: [api, doctor]
     compound_commands: []
     known_gaps:
@@ -90,6 +113,11 @@ clis:
     spec_version: "2024-03-01"
     spec_url: https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/specification/app/resource-manager/Microsoft.App/ContainerApps/stable/2024-03-01/ContainerApps.json
     spec_pipeline: [swagger2openapi]
+    live_smoke:
+      # Azure Container Apps list requires <subscriptionId> positional;
+      # L8 has no subscription-scope plumbing, so deferred.
+      list_subcommand: ""
+      args: []
     daily_commands: [api, doctor]
     compound_commands: []
     known_gaps:

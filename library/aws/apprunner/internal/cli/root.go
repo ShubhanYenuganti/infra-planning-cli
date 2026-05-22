@@ -126,6 +126,7 @@ func Execute() error {
 	rootCmd.AddCommand(newXAmzTargetAppRunnerUntagResourceCmd(&flags))
 	rootCmd.AddCommand(newXAmzTargetAppRunnerUpdateServiceCmd(&flags))
 	rootCmd.AddCommand(newXAmzTargetAppRunnerUpdateVpcIngressConnectionCmd(&flags))
+	rootCmd.AddCommand(newAPICmd(&flags))
 	rootCmd.AddCommand(newDoctorCmd(&flags))
 	rootCmd.AddCommand(newAuthCmd(&flags))
 	rootCmd.AddCommand(newExportCmd(&flags))

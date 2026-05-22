@@ -7,7 +7,8 @@ spec_url: https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/spec
 spec_origin_format: openapi-2.0
 spec_pipeline: ["swagger2openapi"]
 spec_version: "2024-03-01"
-spec_etag: "W/\"16f27a72b238149abb918d1cfad8086f77baa7fedd1245c72e37b9dfab425ebe\""
+spec_sha256: cc3dae7d20541923d75eddc0fb25dbeeb933fd2b1472840988f2b18d17ba9fa7
+vendored_spec: tests/fixtures/specs/container-apps-pp-cli.spec.json
 generated_at: 2026-05-21T03:46:15Z
 patches:
   - path: scripts/spec-to-openapi3.sh
